@@ -119,8 +119,14 @@ img { width: 60px; border-radius: 8px; }
 .mutation-Radioactive { background: linear-gradient(135deg, lime, green); }
 .mutation-Cursed { background: linear-gradient(135deg, purple, black); }
 .mutation-Divine { background: linear-gradient(135deg, white, gold); color:black; }
-
-/* TRAITS */
+.mutation-Cyber { background: linear-gradient(135deg, #020617, #0ea5e9, #22d3ee);box-shadow: 0 0 10px #22d3ee, 0 0 25px #0ea5e9,inset 0 0 10px rgba(255,255,255,0.1);}
+}
+  
+.mutation-Cyber p {
+  text-shadow: 0 0 5px #22d3ee;
+}
+  
+  /* TRAITS */
 .traits-list {
   display: flex;
   flex-wrap: wrap;
@@ -668,13 +674,14 @@ const mutations = [
   {name:"Yin Yang", icon:"⚫⚪"},
   {name:"Radioactive", icon:"☢️"},
   {name:"Cursed", icon:"🔥"},
-  {name:"Divine", icon:"✨"}
+  {name:"Divine", icon:"✨"},
+  {name:"Cyber", icon:"🤖"}
 ];
 
 const mutationValues = {
   "Gold":1.2,"Diamond":1.5,"Rainbow":2,"Bloodroot":2.7,
   "Candy":2.6,"Lava":2.4,"Galaxy":2.2,"Yin Yang":3,
-  "Radioactive":2.5,"Cursed":3.2,"Divine":2.3
+  "Radioactive":2.5,"Cursed":3.2,"Divine":2.3,"Cyber":2.6
 };
 
 const traits = [
