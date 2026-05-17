@@ -835,7 +835,7 @@ max-width:none;
 
     padding:12px;
     overflow-x:hidden;
-
+    overscroll-behavior:none;
   }
 
   .main{
@@ -1024,6 +1024,10 @@ body{
 <div id="mutationPicker" style="
 display:none;
 position:fixed;
+overflow-y:auto;
+max-height:90vh;
+touch-action:auto;
+overscroll-behavior:contain;
 top:0;
 left:0;
 width:100%;
@@ -2207,6 +2211,8 @@ function validateSelection(){
 /* PICKER */
 function openPicker(id){
 
+ document.body.style.overflow = "hidden";
+  
   current = id;
 
   document.getElementById("picker").style.display = "block";
@@ -2273,7 +2279,9 @@ function filterItems(){
 }
 
 function closePicker(){
-document.getElementById("picker").style.display="none";
+
+  document.body.style.overflow = "";
+  document.getElementById("picker").style.display="none";
 }
 
 
