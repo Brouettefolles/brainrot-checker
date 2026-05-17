@@ -1009,6 +1009,28 @@ body{
 
 }
 
+.popup,
+.picker,
+.modal,
+.selectionMenu,
+#mutationPicker{
+
+  position:fixed !important;
+
+  top:5vh !important;
+  left:5% !important;
+
+  width:90% !important;
+  max-height:90vh !important;
+
+  overflow-y:auto !important;
+
+  -webkit-overflow-scrolling:touch;
+
+  overscroll-behavior:contain;
+
+}
+
 </style>
 
 </head>
@@ -1165,8 +1187,9 @@ flex-direction:column;
 
 <h2>💬 Chat Brainrot</h2>
 
-<div id="onlineCount" class="onlineCount">
-🟢 0 joueurs en ligne
+<div id="onlineCount"
+class="onlineCount"
+style="display:none;">
 </div>
 
 <div id="chatMessages" class="chatMessages"></div>
@@ -2905,6 +2928,9 @@ width:100%;
 height:100%;
 background:#000a;
 z-index:9999;
+overflow-y:auto;
+max-height:90vh;
+-webkit-overflow-scrolling:touch;
 ">
 
   <div style="
