@@ -1485,9 +1485,7 @@ if(
   input.value = "";
 };
 
-const q = query(
-
-  const tradesQuery = query(
+const tradesQuery = query(
 
   collection(db, "trades"),
 
@@ -1523,7 +1521,9 @@ onSnapshot(tradesQuery,(snapshot)=>{
   updateFullHistory();
 
 });
-  
+
+const q = query(
+
   collection(db, "messages"),
 
   orderBy("created", "asc"),
