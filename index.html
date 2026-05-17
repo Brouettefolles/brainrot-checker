@@ -1,259 +1,1534 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="fr">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-1K582ZEEHL"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-1K582ZEEHL');
-</script>
-<title>Brainrot Value Checker - Trade Calculator & Values List</title>
+<meta charset="UTF-8">
 
-<link rel="icon" type="image/x-icon" href="favicon.ico">
-<link rel="icon" type="image/png" href="favicon-v2.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="description" content="Best Brainrot value checker. Compare trades, mutations and traits instantly. Free Brainrot calculator.">
-  
+<title>Brainrot Trade</title>
+
+</head>
+
 <style>
+
+.active {
+  background: orange !important;
+  color: black;
+  transform: scale(1.1);
+}
+
+/* ===== GLOBAL ===== */
 body {
-  background: linear-gradient(180deg, #0a0f1f, #050814);
-  color: white;
+  margin: 0;
   font-family: Arial;
-  text-align: center;
+  background: linear-gradient(-45deg,#0f172a,#1e3a8a);
+  color: white;
 }
 
-.container {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 50px;
-  flex-wrap: wrap;
+h1,h2,p { margin:0 }
+
+/* ===== HEADER ===== */
+.title {
+  text-align:center;
+  margin-top:20px;
+  font-size:36px;
+text-shadow: 0 0 15px rgba(255,255,255,0.3);
 }
 
-.box {
-  background: rgba(20, 25, 40, 0.9);
-  border-radius: 15px;
+.trends {
+  margin:15px auto;
+  width:fit-content;
+  background:rgba(255,255,255,0.05);
+  padding:10px 20px;
+  border-radius:20px;
+}
+
+/* ===== LAYOUT ===== */
+.main{
+  display:grid;
+  grid-template-columns:250px 1fr 280px;
+  gap:30px;
+  max-width:1600px;
+  margin:30px auto;
+  align-items:start;
+}
+
+/* ===== LEFT ===== */
+
+.panel, .box {
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(12px);
+  border-radius: 18px;
   padding: 20px;
-  width: 300px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  transition: 0.2s;
 }
 
-.item {
-  margin-top: 10px;
-  padding: 10px;
-  border-radius: 10px;
-  color: white;
+.panel:hover, .box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.6);
 }
 
-.item p {
-  text-shadow: 1px 1px 4px black;
-  font-weight: bold;
+.popularItem {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:10px;
 }
 
-img { width: 60px; border-radius: 8px; }
-
-.add {
-  margin-top: 15px;
-  padding: 12px;
-  background: linear-gradient(90deg, #00c6ff, #0072ff);
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  width: 100%;
-  color: white;
-}
-
-/* GRID */
-#grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 15px;
-}
-
-/* 🔥 ALIGNEMENT FIX */
-#grid div {
-  background:#1e293b;
-  padding:10px;
-  border-radius:10px;
-  cursor:pointer;
+/* ===== CENTER ===== */
+.center {
   display:flex;
   flex-direction:column;
   align-items:center;
-  justify-content:center;
-  height:120px;
+}
+
+.tradeBoxes{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+  width:100%;
+}
+
+
+
+.box{
+  flex:1;
+  min-width:320px;
+
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(12px);
+  border-radius: 18px;
+  padding: 20px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+
+  display:flex;
+  flex-direction:column;
+}
+
+.tradeContent{
+  max-height: 240px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.item {
+  background:#1e293b;
+  padding:10px;
+  border-radius:10px;
+  margin-top:10px;
+
+  display:flex;
+  flex-direction:column; /* 🔥 IMPORTANT */
+  align-items:center;
+  text-align:center;
+}
+.btn {
+  margin-top: 15px;
+  padding: 12px;
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(270deg,#00c6ff,#0072ff);
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #00c6ff;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+.check {
+  width:250px;
+  margin-top:25px;
+}
+
+/* ===== RESULT ===== */
+.resultBox {
+  margin-top:20px;
+  padding:20px;
+  width:100%;
+  background:rgba(255,255,255,0.05);
+  border-radius:15px;
   text-align:center;
 }
 
-#grid img {
-  width:50px;
-  height:50px;
-  object-fit:cover;
-}
-
-/* 🔥 FILTRE RARETE */
-.rarity-filter {
+.values {
   display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-bottom:10px;
+  justify-content:space-around;
+  margin-top:15px;
 }
 
-.rarity-btn {
-  padding:6px 10px;
+/* BAR */
+.bar{
+  width:100%;
+  height:12px;
+
+  background:#111827;
   border-radius:999px;
-  cursor:pointer;
-  background:#1e293b;
-}
 
-.rarity-btn.active {
+  overflow:hidden;
+  margin-top:20px;
+
+  position:relative;
+}
+.fill {
+  height:100%;
+  background: linear-gradient(90deg, red, orange, yellow, lime, cyan);
+  border-radius:20px;
+}
+.cursor {
+  position:absolute;
+  top:-4px;
+  width:18px;
+  height:18px;
   background:white;
-  color:black;
+  border-radius:50%;
+  box-shadow:0 0 10px white;
+}
+/* ===== RIGHT CHAT ===== */
+.chat {
+  display:flex;
+  flex-direction:column;
 }
 
-/* MUTATIONS COULEURS */
-.mutation-Gold { background: linear-gradient(135deg, gold, orange); }
-.mutation-Diamond { background: linear-gradient(135deg, cyan, blue); }
-.mutation-Rainbow { background: linear-gradient(90deg, red, orange, yellow, green, blue); }
-.mutation-Bloodroot { background: linear-gradient(135deg, darkred, red); }
-.mutation-Candy { background: linear-gradient(135deg, pink, hotpink); }
-.mutation-Lava { background: linear-gradient(135deg, orange, darkred); }
-.mutation-Galaxy { background: radial-gradient(circle, #3b0a57, black); }
-.mutation-YinYang { background: linear-gradient(90deg, black 50%, white 50%); }
-.mutation-Radioactive { background: linear-gradient(135deg, lime, green); }
-.mutation-Cursed { background: linear-gradient(135deg, purple, black); }
-.mutation-Divine { background: linear-gradient(135deg, white, gold); color:black; }
-.mutation-Cyber { background: linear-gradient(135deg, #020617, #0ea5e9, #22d3ee);box-shadow: 0 0 10px #22d3ee, 0 0 25px #0ea5e9,inset 0 0 10px rgba(255,255,255,0.1);}
-}
-  
-.mutation-Cyber p {
-  text-shadow: 0 0 5px #22d3ee;
-}
-  
-  /* TRAITS */
-.traits-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+.msg {
+  background:#1e293b;
+  padding:10px;
+  border-radius:10px;
+  margin-top:10px;
 }
 
-.trait {
-  background: #1e293b;
-  padding: 6px 10px;
-  border-radius: 999px;
-  cursor: pointer;
-}
-
-.trait.active {
-  background: orange;
-  color: black;
+.input {
+  margin-top:auto;
+  display:flex;
+  gap:5px;
 }
 
 input {
-  padding: 8px;
-  border-radius: 8px;
-  border: none;
-  margin-bottom: 10px;
-  width: 100%;
+  flex:1;
+  padding:10px;
+  border-radius:10px;
+  border:none;
 }
+
+.send {
+  padding:10px;
+  border:none;
+  border-radius:10px;
+  background:#0ea5e9;
+  color:white;
+}
+
+/* ===== PICKER ===== */
+#picker{
+    display:none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    width: 90%;
+    max-width: 1100px;
+    height: 85vh;
+
+    background: transparent;
+    border-radius: 20px;
+    z-index: 9999;
+
+    padding: 0;
+    overflow: hidden;
+
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}
+
+#pickerContent {
+  background:#0f172a;
+  margin:50px auto;
+  padding:20px;
+  width:90%;
+  max-width:800px;
+  border-radius:15px;
+
+  height:80vh;
+
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+
+  overflow:hidden;
+}
+
+#grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+  gap:15px;
+}
+
+#gridWrapper{
+  flex:1;
+  overflow-y:auto;
+  padding-right:5px;
+  min-height:0;
+}
+
+#searchBar{
+  width:100%;
+
+  padding:10px 14px;
+
+  border:none;
+  border-radius:12px;
+
+  background:#1e293b;
+  color:white;
+
+  font-size:16px;
+
+  box-sizing:border-box;
+
+  flex:none;
+}
+
+.rarityFilters{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.rarityFilters button{
+  border:none;
+  padding:8px 14px;
+  border-radius:999px;
+  cursor:pointer;
+  color:white;
+  font-weight:bold;
+  transition:0.2s;
+
+  box-shadow:none;
+  outline:none;
+}
+
+.rarityFilters button:hover{
+  transform:scale(1.05);
+}
+
+.rarityFilters button:focus{
+  outline:none;
+  box-shadow:none;
+}
+
+.common{background:#22c55e;}
+.rare{background:#3b82f6;}
+.epic{background:#a855f7;}
+.legendary{background:#f59e0b;}
+.mythic{background:#ef4444;}
+.dieu{background:#06b6d4;}
+.secret{
+  background:linear-gradient(90deg,#ff00ff,#00ffff);
+}
+.og{
+  background:linear-gradient(90deg,#facc15,#f97316);
+}
+
+.activeFilter{
+  transform:scale(1.05);
+  border:2px solid rgba(255,255,255,0.35);
+  box-shadow:0 0 10px rgba(255,255,255,0.12);
+}
+
+.all{
+  background:#6b7280;
+}
+
+#grid div {
+  background:#1e293b;
+  padding:15px;
+  border-radius:12px;
+  cursor:pointer;
+  text-align:center;
+  transition:0.2s;
+}
+
+#grid div:hover {
+  transform:scale(1.05);
+}
+
+.add {
+  transition: all 0.25s ease;
+}
+
+.add:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 20px #00c6ff, 0 0 40px #0072ff;
+}
+
+.add:active {
+  transform: scale(0.95);
+}
+
+.btn-add {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    border: none;
+    border-radius: 12px;
+    padding: 12px 20px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-add:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 150, 255, 0.5);
+}
+
+.btn-add {
+    width: 100%;
+}
+
+.btn-add {
+    width: 80%;
+    margin: 0 auto;       /* centre le bouton */
+    display: block;       /* obligatoire pour centrer */
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    border: none;
+    border-radius: 12px;
+    padding: 12px 20px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-add {
+    width: 100%;
+    width:100%;
+max-width:none;
+    margin: 15px auto;
+    display: block;
+}
+
+.card {
+    text-align: center;
+}
+
+.btn-verify {
+    background: linear-gradient(135deg, #00ff87, #00c6ff);
+    color: #0b1a2a;
+    font-size: 22px;
+    font-weight: bold;
+    padding: 18px 60px;
+    border-radius: 18px;
+    border: none;
+    cursor: pointer;
+    display: block;
+    margin: 40px auto;
+    transition: all 0.2s ease;
+    box-shadow: 0 0 20px rgba(0, 255, 150, 0.5);
+}
+
+.btn-verify:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 40px rgba(0, 255, 150, 0.9);
+}
+.btn-verify {
+    width: 250px;
+}
+
+.btn-verify {
+    background: linear-gradient(135deg, #00ff87, #00c6ff);
+    color: #0b1a2a;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 18px 50px;
+    border-radius: 16px;
+    border: none;
+    cursor: pointer;
+    display: block;
+    margin: 40px auto;
+    transition: all 0.2s ease;
+}
+
+.btn-verify:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(0, 255, 150, 0.7);
+}
+
+
+#tradeStatus{
+    font-size:42px;
+    font-weight:900;
+    text-align:center;
+    margin-bottom:25px;
+    letter-spacing:2px;
+
+    background:linear-gradient(90deg,#00e5ff,#ffffff,#00e5ff);
+    background-size:200% auto;
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    animation:shine 3s linear infinite;
+}
+
+@keyframes shine{
+    to{
+        background-position:200% center;
+    }
+}
+
+.closeBtn:hover{
+  transform: scale(1.2);
+  color:#ff4d4d;
+}
+
+.pop{
+  animation:popAnim 0.35s ease;
+}
+
+@keyframes popAnim{
+  0%{
+    transform:scale(0.8);
+  }
+  50%{
+    transform:scale(1.08);
+  }
+  100%{
+    transform:scale(1);
+  }
+}
+
+@keyframes massiveFlash{
+
+  0%{
+    filter:brightness(1);
+  }
+
+  50%{
+    filter:brightness(1.4);
+  }
+
+  100%{
+    filter:brightness(1);
+  }
+
+}
+
+.massive{
+  animation: massiveFlash 0.6s ease;
+}
+
+.historyEntry{
+  padding:8px;
+  margin-top:6px;
+  border-radius:8px;
+  background:rgba(255,255,255,0.06);
+
+  animation:historyPop 0.35s ease;
+}
+
+.historyW{
+  border-left:4px solid #00ff88;
+}
+
+.historyFair{
+  border-left:4px solid orange;
+}
+
+.historyL{
+  border-left:4px solid #ff4d4d;
+}
+
+@keyframes historyPop{
+  0%{
+    opacity:0;
+    transform:translateX(-20px);
+  }
+
+  100%{
+    opacity:1;
+    transform:translateX(0);
+  }
+}
+
+.deleteBtn{
+  margin-top:10px;
+
+  width:32px;
+  height:32px;
+
+  border:none;
+  border-radius:50%;
+
+  background:rgba(255,70,70,0.15);
+
+  color:#ff4d4d;
+
+  font-size:18px;
+  font-weight:bold;
+
+  cursor:pointer;
+
+  transition:0.2s;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.deleteBtn:hover{
+  transform:scale(1.15);
+
+  background:rgba(255,70,70,0.3);
+
+  box-shadow:0 0 12px rgba(255,70,70,0.5);
+}
+
+.deleteBtn:active{
+  transform:scale(0.92);
+}
+
+.tradeContent{
+  flex:1;
+
+  overflow-y:auto;
+
+  padding-right:5px;
+}
+
+.center{
+  width:100%;
+}
+
+.chat{
+  height:fit-content;
+}
+
+.clearBtn{
+  width:100%;
+  max-width:300px;
+  margin:10px auto 0 auto;
+  display:block;
+
+  background:#ef4444;
+  border:none;
+  border-radius:12px;
+
+  padding:10px;
+  color:white;
+  font-weight:bold;
+
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.clearBtn:hover{
+  transform:scale(1.03);
+  background:#dc2626;
+}
+
+.btn-close{
+  background: linear-gradient(90deg,#18c8ff,#1677ff);
+  border:none;
+  border-radius:12px;
+
+  color:white;
+  font-weight:bold;
+
+  padding:12px 25px;
+  cursor:pointer;
+
+  transition:0.2s;
+}
+
+.btn-close:hover{
+  transform:scale(1.03);
+}
+
+.mutationButtons{
+  display:flex;
+  gap:20px;
+  margin-top:20px;
+  width:100%;
+}
+
+.mutationButtons .btn-add{
+  flex:1;
+  padding:14px;
+  font-size:16px;
+}
+
+
+/* FIRE SCROLLBAR */
+
+::-webkit-scrollbar{
+  width:16px;
+}
+
+::-webkit-scrollbar-track{
+  background:#070b1a;
+  border-radius:20px;
+}
+
+::-webkit-scrollbar-thumb{
+  border-radius:20px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ff0000,
+      #ff6600,
+      #ffcc00,
+      #ff3300,
+      #ff0000
+    );
+
+  background-size:100% 300%;
+
+  border:2px solid #111827;
+
+  box-shadow:
+    0 0 10px #ff3300,
+    0 0 20px #ff6600,
+    0 0 35px #ff0000;
+
+  animation: fireScroll 1.5s linear infinite;
+}
+
+::-webkit-scrollbar-thumb:hover{
+  box-shadow:
+    0 0 20px #ff3300,
+    0 0 40px #ff6600,
+    0 0 60px #ff0000;
+}
+
+@keyframes fireScroll{
+
+  0%{
+    background-position:0% 0%;
+  }
+
+  100%{
+    background-position:0% 300%;
+  }
+
+}
+
+.chatMessages{
+
+  height:300px;
+
+  overflow-y:auto;
+
+  display:flex;
+  flex-direction:column;
+
+  gap:10px;
+
+  margin-top:15px;
+  margin-bottom:15px;
+}
+
+.chatMsg{
+
+  background:#1e293b;
+
+  padding:10px;
+
+  border-radius:12px;
+
+  word-break:break-word;
+
+  animation:fadeIn 0.2s ease;
+}
+
+.chatName{
+
+  color:#00e5ff;
+
+  font-weight:bold;
+
+  margin-bottom:5px;
+}
+
+@keyframes fadeIn{
+
+  from{
+    opacity:0;
+    transform:translateY(10px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+}
+
+.chatTop{
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  margin-bottom:5px;
+}
+
+.chatTime{
+
+  color:#94a3b8;
+  font-size:12px;
+}
+
+.onlineCount{
+
+  background:#1e293b;
+
+  padding:10px 15px;
+
+  border-radius:12px;
+
+  width:fit-content;
+
+  margin-bottom:15px;
+
+  font-weight:bold;
+
+  color:#4ade80;
+
+  box-shadow:0 0 15px rgba(74,222,128,0.4);
+}
+
+.onlineCount{
+
+  background:#1e293b;
+
+  padding:10px 15px;
+
+  border-radius:12px;
+
+  width:fit-content;
+
+  margin-bottom:15px;
+
+  font-weight:bold;
+
+  color:#4ade80;
+
+  box-shadow:0 0 15px rgba(74,222,128,0.4);
+}
+
+@media (max-width: 768px){
+
+  body{
+
+    padding:12px;
+    overflow-x:hidden;
+
+  }
+
+  .main{
+
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+
+  }
+
+  .panel,
+  .center,
+  .chat,
+  .box,
+  .resultBox{
+
+    width:100% !important;
+    max-width:100% !important;
+
+    padding:20px;
+    border-radius:20px;
+
+    box-sizing:border-box;
+
+  }
+
+  .tradeBoxes{
+
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+
+  }
+
+  .tradeContent{
+
+    max-height:250px;
+    overflow-y:auto;
+
+  }
+
+  .btn-verify{
+
+    width:100%;
+    font-size:26px;
+    padding:18px;
+
+    border-radius:18px;
+
+  }
+
+  .btn-add,
+  .clearBtn{
+
+    width:100%;
+    font-size:17px;
+    padding:14px;
+
+    border-radius:14px;
+
+  }
+
+  .values{
+
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+
+    text-align:center;
+
+    font-size:20px;
+
+  }
+
+  .bar{
+
+    margin-top:20px;
+
+  }
+
+  .chatMessages{
+
+    height:160px;
+    overflow-y:auto;
+
+  }
+
+  .input{
+
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+
+  }
+
+  .input input{
+
+    flex:1;
+    font-size:16px;
+    padding:14px;
+
+    border-radius:12px;
+
+  }
+
+  .send{
+
+    min-width:55px;
+    font-size:18px;
+
+  }
+
+  h1{
+
+    font-size:42px;
+    line-height:1.2;
+
+    text-align:center;
+
+  }
+
+  h2{
+
+    font-size:18px;
+
+  }
+
+  .trends{
+
+    font-size:14px;
+    line-height:1.5;
+
+    padding:12px;
+
+  }
+
+  #popularList img{
+
+    width:28px;
+    height:28px;
+
+  }
+
+  .resultBox{
+
+    padding-top:30px;
+    padding-bottom:30px;
+
+  }
+
+}
+
 </style>
+
 </head>
 
 <body>
 
-<h1>Brainrot Trade Checker</h1>
+<h1 class="title">✨ Vérificateur d'échanges Brainrot ✨</h1>
 
-<div class="container">
-
-<div class="box">
-<h2>Votre offre</h2>
-<div id="yourContainer"></div>
-<button class="add" onclick="openPicker('yourContainer')">➕ Ajouter</button>
-<p id="yourValue">Valeur : 0</p>
+<div class="trends" id="topTrendBar">
+🔥 Aucun item populaire pour le moment
 </div>
 
-<div class="box">
-<h2>Leur offre</h2>
-<div id="theirContainer"></div>
-<button class="add" onclick="openPicker('theirContainer')">➕ Ajouter</button>
-<p id="theirValue">Valeur : 0</p>
-</div>
-
-</div>
-
-<button class="add" onclick="checkTrade()">CHECK TRADE</button>
-<h2 id="result"></h2>
-
-<!-- PICKER -->
-<div id="picker" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000c; overflow:auto;">
-<div style="background:#111; padding:20px; margin:50px auto; width:80%; border-radius:10px;">
-
-<h2>Select Brainrot</h2>
-<input type="text" id="searchBrainrot" placeholder="🔍 Rechercher...">
-
-<div class="rarity-filter" id="rarityFilter"></div>
-
-<div id="grid"></div>
-<button onclick="closePicker()">Fermer</button>
-
-</div>
-</div>
-
-<!-- MUTATION + TRAITS -->
-<div id="mutationPicker" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000c;">
-<div style="
+<div id="mutationPicker" style="
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#000c;
+z-index:10000;
+overflow:hidden;
+">
+  <div style="
 background:#0f172a;
-padding:25px;
-margin:40px auto;
+margin:30px auto;
+padding:20px;
 width:90%;
-max-width:1100px;
+max-width:900px;
 height:85vh;
 border-radius:15px;
-overflow-y:auto;
+display:flex;
+flex-direction:column;
 ">
 
-<div id="selectedBrainrotPreview"></div>
+    <h2>Choisir une mutation</h2>
+    <div id="mutationList" style="display:flex; flex-wrap:wrap; gap:10px;"></div>
 
-<h2>Mutation (OBLIGATOIRE)</h2>
-<div id="mutationList" style="display:flex; flex-wrap:wrap; gap:10px;"></div>
+    <h2>Traits</h2>
+    <div id="traitsList" style="display:flex; flex-wrap:wrap; gap:10px;"></div>
+
+  <div class="mutationButtons">
+
+  <button class="btn-add" onclick="validateSelection()">
+    Ajouter
+  </button>
+
+  <button class="btn-add" onclick="closeMutationPicker()">
+    Fermer
+  </button>
+
+</div>
+    
+  </div>
+</div>
+
+<div class="main">
+
+<!-- LEFT -->
+
+<div class="panel">
+<h2>🔥 Items populaires</h2>
+
+<div id="popularList"></div>
 
 <hr>
 
-<h2>Traits</h2>
-<input type="text" id="traitSearch">
-<div id="traitsList" class="traits-list"></div>
+<h2 style="margin-top:10px;">🕒 Historique</h2>
 
-<button class="add" onclick="validateSelection()">Ajouter</button>
+<div id="historyList">
+  <p>Aucun trade pour le moment</p>
+</div>
+
+<button id="showAllBtn" class="btn" style="margin-top:10px; display:none;">
+  Voir tout
+</button>
 
 </div>
+
+<!-- CENTER -->
+
+<div class="center">
+
+<div class="tradeBoxes">
+
+  <div class="box">
+
+    <h2>Votre offre</h2>
+
+    <div class="tradeContent">
+      <div id="your"></div>
+    </div>
+
+    <button class="btn-add" onclick="openPicker('your')">
+      + Ajouter
+    </button>
+
+  <button class="clearBtn" onclick="clearTrade('your')">
+  🗑 Vider
+</button>
+
+ </div>
+
+  <div class="box">
+
+    <h2>Leur offre</h2>
+
+    <div class="tradeContent">
+      <div id="their"></div>
+    </div>
+
+    <button class="btn-add" onclick="openPicker('their')">
+      + Ajouter
+    </button>
+
+  <button class="clearBtn" onclick="clearTrade('their')">
+  🗑 Vider
+</button>
+  
+  </div>
+
 </div>
+
+<button class="btn-verify" onclick="checkTrade()">
+  VÉRIFIER
+</button>
+
+<div class="resultBox">
+
+  <h2 id="tradeStatus">⚖️ TRADE ANALYSIS</h2>
+
+  <div class="values">
+    <div>Toi : <b id="yourVal">0</b></div>
+    <div>Eux : <b id="theirVal">0</b></div>
+    <div>Diff : <b id="diffVal">0</b></div>
+  </div>
+
+  <div class="bar">
+    <div class="fill" id="fill"></div>
+    <div class="cursor" id="cursor"></div>
+  </div>
+
+</div> <!-- FIN RESULTBOX -->
+
+</div> <!-- FIN CENTER -->
+
+<!-- RIGHT -->
+
+<div class="panel chat">
+
+<h2>💬 Chat Brainrot</h2>
+
+<div id="onlineCount" class="onlineCount">
+🟢 0 joueurs en ligne
+</div>
+
+<div id="chatMessages" class="chatMessages"></div>
+
+<div class="input">
+
+<input id="chatInput" placeholder="Message...">
+
+<button class="send" onclick="sendMessage()">
+➤
+</button>
+
+</div>
+
+</div>
+
+<!-- PICKER -->
+
+<div id="picker">
+<div id="pickerContent">
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+">
+
+<h2>Choisir un item</h2>
+
+<button onclick="closePicker()" style="
+background:none;
+border:none;
+color:white;
+font-size:28px;
+cursor:pointer;
+font-weight:bold;
+transition:0.2s;
+">
+✕
+</button>
+
+</div>
+
+
+<input type="text" id="searchBar" placeholder="🔎 Rechercher un brainrot..." onkeyup="filterItems()">
+
+<div class="rarityFilters">
+  <button onclick="setFilter('All')" class="all activeFilter">All</button>
+  <button onclick="setFilter('Common')" class="common">Common</button>
+  <button onclick="setFilter('Rare')" class="rare">Rare</button>
+  <button onclick="setFilter('Epic')" class="epic">Epic</button>
+  <button onclick="setFilter('Legendary')" class="legendary">Legendary</button>
+  <button onclick="setFilter('Mythic')" class="mythic">Mythic</button>
+  <button onclick="setFilter('Dieu')" class="dieu">Dieu</button>
+  <button onclick="setFilter('Secret')" class="secret">Secret</button>
+  <button onclick="setFilter('OG')" class="og">OG</button>
+</div>
+
+<div id="gridWrapper">
+  <div id="grid"></div>
+</div>
+<button class="btn" onclick="closePicker()">Fermer</button>
+</div>
+</div>
+
+<script type="module">
+
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+
+  getFirestore,
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  limit,
+  onSnapshot
+
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+import {
+
+  getDatabase,
+  ref,
+  set,
+  onDisconnect,
+  onValue
+
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyDN031mfd72CplGTYrExYzX06yLN6Ivd9I",
+
+  authDomain: "brainrot-trade-815ff.firebaseapp.com",
+
+  projectId: "brainrot-trade-815ff",
+
+  storageBucket: "brainrot-trade-815ff.firebasestorage.app",
+
+  messagingSenderId: "692224179025",
+
+  appId: "1:692224179025:web:29528baea1382b2566f170"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const realtimeDb = getDatabase(app);
+
+window.realtimeDb = realtimeDb;
+
+window.ref = ref;
+window.set = set;
+
+window.onDisconnect = onDisconnect;
+window.onValue = onValue;
+
+window.db = db;
+
+window.collection = collection;
+window.addDoc = addDoc;
+
+window.query = query;
+window.orderBy = orderBy;
+window.limit = limit;
+
+window.onSnapshot = onSnapshot;
+
+let username =
+  localStorage.getItem("brainrotName");
+
+if(!username){
+
+  username = prompt("Choisis un pseudo 😎");
+
+ const bannedNames = [
+
+  "hitler",
+  "adolf",
+  "nazi",
+  "admin",
+  "mod",
+  "owner"
+
+];
+
+if(
+
+  bannedNames.some(name =>
+    username.toLowerCase().includes(name)
+  )
+
+){
+
+  username =
+    "Player" + Math.floor(Math.random()*9999);
+
+}
+
+  if(!username || username.trim() === ""){
+
+    username =
+      "Player" + Math.floor(Math.random() * 9999);
+  }
+
+  localStorage.setItem(
+    "brainrotName",
+    username
+  );
+}
+
+ let lastMessageTime = 0;
+
+window.sendMessage = async function(){
+
+  const input =
+    document.getElementById("chatInput");
+
+  const text =
+    input.value.trim();
+
+  if(!text) return;
+
+  if(text.length > 120){
+
+  alert("Message trop long 😭");
+
+  return;
+
+}
+
+  const now = Date.now();
+
+  if(now - lastMessageTime < 3000){
+
+    alert("Doucement 😭");
+
+    return;
+  }
+
+  lastMessageTime = now;
+
+  const bannedWords = [
+
+  "fdp",
+  "encule",
+  "nazi",
+  "hiiitler",
+  "hiitler",
+  "hittler",
+  "hiittler",
+  "hitller",
+  "adolf",
+  "pute",
+  "ntm",
+  "connard"
+
+];
+
+const lower =
+  text.toLowerCase();
+
+if(
+
+  bannedWords.some(word =>
+    lower.includes(word)
+  )
+
+){
+
+  alert("Message interdit 💀");
+
+  return;
+
+}
+
+if((text.match(/🔥/g)||[]).length > 10){
+
+  alert("Doucement sur les emojis 😭");
+
+  return;
+
+}
+
+if(
+
+  text.includes("http") ||
+  text.includes("www") ||
+  text.includes("discord.gg")
+
+){
+
+  alert("Liens interdits 😎");
+
+  return;
+
+}
+
+  const filtered = text
+
+  .replace(/\bw\b/gi, "🔥 W")
+  .replace(/\bl\b/gi, "💀 L")
+  .replace(/\bbrainrot\b/gi, "🧠 Brainrot");
+
+  await addDoc(collection(db, "messages"), {
+
+    name: username,
+
+    text: filtered,
+
+    created: Date.now(),
+
+    time: new Date().toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit'
+    })
+
+  });
+
+  input.value = "";
+};
+
+const q = query(
+
+  collection(db, "messages"),
+
+  orderBy("created", "asc"),
+
+  limit(50)
+
+);
+
+onSnapshot(q, (snapshot)=>{
+
+  const box =
+    document.getElementById("chatMessages");
+
+  box.innerHTML = "";
+
+  snapshot.forEach((doc)=>{
+
+    const data = doc.data();
+
+    const div =
+      document.createElement("div");
+
+    div.className = "chatMsg";
+
+    div.innerHTML = `
+
+      <div class="chatTop">
+
+        <div class="chatName">
+          ${data.name}
+        </div>
+
+        <div class="chatTime">
+          ${data.time || ''}
+        </div>
+
+      </div>
+
+      <div>
+        ${data.text}
+      </div>
+
+    `;
+
+    box.appendChild(div);
+
+  });
+
+  const nearBottom =
+    box.scrollHeight - box.scrollTop <=
+    box.clientHeight + 200;
+
+  if(nearBottom){
+
+    box.scrollTop = box.scrollHeight;
+
+  }
+
+});
+
+document
+  .getElementById("chatInput")
+  .addEventListener("keydown", function(e){
+
+    if(e.key === "Enter"){
+
+      e.preventDefault();
+
+      sendMessage();
+
+    }
+
+});
+
+
+document.getElementById("showAllBtn").onclick = ()=>{
+
+  document.getElementById(
+    "historyPopup"
+  ).style.display = "block";
+
+};
+
+</script>
 
 <script>
 
-/* 🔥 FILTRE RARETE */
-let selectedRarity="All";
-const rarities=["All","Common","Rare","Epic","Legendary","Mythic","Dieu","Secret","OG"];
+window.addEventListener("load", ()=>{
 
-function loadRarityFilter(){
-  let f=document.getElementById("rarityFilter");
-  f.innerHTML="";
-  rarities.forEach(r=>{
-    let btn=document.createElement("div");
-    btn.className="rarity-btn";
-    btn.innerText=r;
-btn.setAttribute("data-rarity", r);
-    btn.onclick=()=>{
-      selectedRarity=r;
-      document.querySelectorAll(".rarity-btn").forEach(b=>b.classList.remove("active"));
-      btn.classList.add("active");
-      loadPicker();
-    };
-    if(r==="All") btn.classList.add("active");
-    f.appendChild(btn);
-  });
-}
-/* EXEMPLE */
+window.db = window.db;
+window.collection = window.collection;
+window.addDoc = window.addDoc;
+
+});
+
+
+/* ===== FAKE DATA ===== */
 const brainrots = [ 
   { name: "Noobini Pizzanini", value: 0.10, img: "images/noobini-pizzanini.png", rarity: "Common" }, 
   { name: "Lirili Larila", value: 0.10, img: "images/lirili-larila.png", rarity: "Common" }, 
@@ -418,6 +1693,7 @@ const brainrots = [
   { name: "Granchiello Spiritell", value: 0.10, img: "images/89.png", rarity: "Dieu" },
   { name: "Los Tipi Tacos", value: 0.10, img: "images/90.png", rarity: "Dieu" },
   { name: "Frio Ninja", value: 0.10, img: "images/91.png", rarity: "Dieu" },
+  { name: "Lumaca Malefica", value: 0.10, img: "images/375.png", rarity: "Dieu" },
   { name: "Buho De Noelo", value: 0.10, img: "images/92.png", rarity: "Dieu" },
   { name: "Bunny Tralala", value: 0.10, img: "images/93.png", rarity: "Dieu" },
   { name: "Boba Panda", value: 0.10, img: "images/94.png", rarity: "Dieu" },
@@ -448,240 +1724,248 @@ const brainrots = [
   { name: "Clovkur Kurkur", value: 0.10, img: "images/118.png", rarity: "Dieu" },
   { name: "Eggdin Egg Egg Dun", value: 0.10, img: "images/119.png", rarity: "Dieu" },
   { name: "Dumborino Miracello", value: 0.10, img: "images/120.png", rarity: "Dieu" },
+  { name: "Robo Grafito", value: 0.10, img: "images/374.png", rarity: "Dieu" },
   { name: "La Vacca Saturno Saturnita", value: 0.10, img: "images/121.png", rarity: "Secret" },
-{ name: "Bisonte Giuppitere", value: 0.10, img: "images/122.png", rarity: "Secret" },
-{ name: "Sammyni Spyderini", value: 0.10, img: "images/123.png", rarity: "Secret" },
-{ name: "Blackhole Goat", value: 0.10, img: "images/124.png", rarity: "Secret" },
-{ name: "Pretzo Robo", value: 0.10, img: "images/364.png", rarity: "Secret" },
-{ name: "Jackorilla", value: 0.10, img: "images/125.png", rarity: "Secret" },
-{ name: "Karkerkar Kurkur", value: 0.10, img: "images/126.png", rarity: "Secret" },
-{ name: "Agarrini La Palini", value: 0.10, img: "images/127.png", rarity: "Secret" },
-{ name: "Chachechi", value: 0.10, img: "images/128.png", rarity: "Secret" },
-{ name: "Trenostruzzo Turbo 4000", value: 0.10, img: "images/129.png", rarity: "Secret" },
-{ name: "Los Matteos", value: 0.10, img: "images/131.png", rarity: "Secret" },
-{ name: "Los Tortus", value: 0.10, img: "images/132.png", rarity: "Secret" },
-{ name: "Los Tralaleritos", value: 0.10, img: "images/133.png", rarity: "Secret" },
-{ name: "La Cucaracha", value: 0.10, img: "images/134.png", rarity: "Secret" },
-{ name: "Vulturino Skeletono", value: 0.10, img: "images/135.png", rarity: "Secret" },
-{ name: "Boatito Auratito", value: 0.10, img: "images/136.png", rarity: "Secret" },
-{ name: "Torrtuginni Dragonfrutini ", value: 0.10, img: "images/137.png", rarity: "Secret" },
-{ name: "Los Spyderinis", value: 0.10, img: "images/138.png", rarity: "Secret" },
-{ name: "Extinct Tralalero", value: 0.10, img: "images/139.png", rarity: "Secret" },
-{ name: "Fragola La La La", value: 4, img: "images/140.png", rarity: "Secret" },
-{ name: "Zombie Tralala", value: 0.10, img: "images/141.png", rarity: "Secret" },
-{ name: "Yess my examine", value: 0.10, img: "images/142.png", rarity: "Secret" },
-{ name: "Extinct Matteo", value: 0.10, img: "images/143.png", rarity: "Secret" },
-{ name: "Dul Dul Dul", value: 0.10, img: "images/144.png", rarity: "Secret" },
-{ name: "Guerriro Digitale", value: 0.10, img: "images/145.png", rarity: "Secret" },
-{ name: "Las Tralaleritas", value: 0.10, img: "images/146.png", rarity: "Secret" },
-{ name: "Rocco Disco", value: 0.10, img: "images/147.png", rarity: "Secret" },
-{ name: "La Karkerkar Combinasion", value: 0.10, img: "images/148.png", rarity: "Secret" },
-{ name: "La Vacca Prese Presente", value: 0.10, img: "images/149.png", rarity: "Secret" },
-{ name: "Reindeer Tralala", value: 0.10, img: "images/150.png", rarity: "Secret" },
-{ name: "Pumpkini Spyderini", value: 0.10, img: "images/151.png", rarity: "Secret" },
-{ name: "Los Trios", value: 0.10, img: "images/152.png", rarity: "Secret" },
-{ name: "Frankentteo", value: 0.10, img: "images/153.png", rarity: "Secret" },
-{ name: "Job Job Job Sahur", value: 0.10, img: "images/154.png", rarity: "Secret" },
-{ name: "Karker Sahur", value: 0.10, img: "images/155.png", rarity: "Secret" },
-{ name: "Las Vaquitas Saturnitas", value: 0.10, img: "images/156.png", rarity: "Secret" },
-{ name: "Los Karkeritos", value: 0.10, img: "images/157.png", rarity: "Secret" },
-{ name: "Santteo", value: 0.10, img: "images/158.png", rarity: "Secret" },
-{ name: "Fishboard", value: 0.10, img: "images/159.png", rarity: "Secret" },
-{ name: "Buntteo", value: 0.10, img: "images/160.png", rarity: "Secret" },
-{ name: "La Vacca Jacko Linterino", value: 0.10, img: "images/161.png", rarity: "Secret" },
-{ name: "Triplito Tralaleritos", value: 0.10, img: "images/162.png", rarity: "Secret" },
-{ name: "Paradiso Axolottino", value: 0.10, img: "images/163.png", rarity: "Secret" },
-{ name: "Trickolino", value: 0.10, img: "images/164.png", rarity: "Secret" },
-{ name: "GOAT", value: 0.10, img: "images/165.png", rarity: "Secret" },
-{ name: "Giftini Spyderini", value: 0.10, img: "images/166.png", rarity: "Secret" },
-{ name: "Love Love Love Sahur", value: 0.10, img: "images/167.png", rarity: "Secret" },
-{ name: "Graipuss Medussi", value: 0.10, img: "images/168.png", rarity: "Secret" },
-{ name: "Perrito Burrito", value: 0.10, img: "images/169.png", rarity: "Secret" },
-{ name: "La Vacca Lepre Lepreino", value: 0.10, img: "images/170.png", rarity: "Secret" },
-{ name: "1x1x1x1", value: 0.10, img: "images/171.png", rarity: "Secret" },
-{ name: "Easter Easter Easter Sahur", value: 0.10, img: "images/172.png", rarity: "Secret" },
-{ name: "Los Cucarachas", value: 0.10, img: "images/173.png", rarity: "Secret" },
-{ name: "Please my Present", value: 0.10, img: "images/174.png", rarity: "Secret" },
-{ name: "Cuadramat and Pakrahmatmamat", value: 0.10, img: "images/175.png", rarity: "Secret" },
-{ name: "Berryno", value: 0.10, img: "images/332.png", rarity: "Secret" },
-{ name: "Bunnyman", value: 0.10, img: "images/176.png", rarity: "Secret" },
-{ name: "Tung Tung Tung Sahur", value: 0.10, img: "images/178.png", rarity: "Secret" },
-{ name: "Los Jobcitos", value: 0.10, img: "images/179.png", rarity: "Secret" },
-{ name: "Nooo My Hotspot", value: 0.10, img: "images/180.png", rarity: "Secret" },
-{ name: "Noo my examine", value: 0.10, img: "images/181.png", rarity: "Secret" },
-{ name: "La Sahur Combinasion", value: 0.10, img: "images/182.png", rarity: "Secret" },
-{ name: "List List List Sahur", value: 0.10, img: "images/183.png", rarity: "Secret" },
-{ name: "Telemorte", value: 0.10, img: "images/184.png", rarity: "Secret" },
-{ name: "Bunny Bunny Bunny Sahur", value: 0.10, img: "images/185.png", rarity: "Secret" },
-{ name: "To to to Sahur", value: 0.10, img: "images/186.png", rarity: "Secret" },
-{ name: "Pirulitoita Bicicleteira", value: 0.10, img: "images/187.png", rarity: "Secret" },
-{ name: "25", value: 0.10, img: "images/188.png", rarity: "Secret" },
-{ name: "Pot Hotspot", value: 0.10, img: "images/189.png", rarity: "Secret" },
-{ name: "Santa Hotspot", value: 0.10, img: "images/190.png", rarity: "Secret" },
-{ name: "Buho De Volto", value: 0.10, img: "images/365.png", rarity: "Secret" },
-{ name: "Horegini Boom", value: 0.10, img: "images/191.png", rarity: "Secret" },
-{ name: "Pot Pumpkin", value: 0.10, img: "images/192.png", rarity: "Secret" },
-{ name: "Naughty Naughty", value: 0.10, img: "images/193.png", rarity: "Secret" },
-{ name: "Quesadilla Crocodila", value: 0.10, img: "images/194.png", rarity: "Secret" },
-{ name: "Cupid Cupid Sahur", value: 0.10, img: "images/195.png", rarity: "Secret" },
-{ name: "Mi Gatito", value: 0.10, img: "images/196.png", rarity: "Secret" },
-{ name: "Ho Ho Ho Sahur", value: 0.10, img: "images/197.png", rarity: "Secret" },
-{ name: "Cupid Hotspot", value: 0.10, img: "images/198.png", rarity: "Secret" },
-{ name: "Eid Eid Eid Sahur", value: 0.10, img: "images/199.png", rarity: "Secret" },
-{ name: "Chicleteira Bicicleteira", value: 0.10, img: "images/200.png", rarity: "Secret" },
-{ name: "Brunito Marsito", value: 0.10, img: "images/201.png", rarity: "Secret" },
-{ name: "Quesadillo Vampiro", value: 0.10, img: "images/202.png", rarity: "Secret" },
-{ name: "Luck Luck Luck Sahur", value: 0.10, img: "images/203.png", rarity: "Secret" },
-{ name: "Granny", value: 0.10, img: "images/204.png", rarity: "Secret" },
-{ name: "Chicleteirina Bicicleteirina", value: 0.10, img: "images/205.png", rarity: "Secret" },
-{ name: "Burrito Bandito", value: 0.10, img: "images/206.png", rarity: "Secret" },
-{ name: "Chill Puppy", value: 0.10, img: "images/207.png", rarity: "Secret" },
-{ name: "Los Bunitos", value: 0.10, img: "images/208.png", rarity: "Secret" },
-{ name: "Bunito Bunito Spinito", value: 0.10, img: "images/209.png", rarity: "Secret" },
-{ name: "Los Quesadillas", value: 0.10, img: "images/210.png", rarity: "Secret" },
-{ name: "Futbolini Skatini", value: 0.15, img: "images/390.png", rarity: "Secret" },
-{ name: "Arcadopus", value: 0.10, img: "images/211.png", rarity: "Secret" },
-{ name: "Noo my candy", value: 0.10, img: "images/212.png", rarity: "Secret" },
-{ name: "Serafinna Medusella", value: 0.10, img: "images/213.png", rarity: "Secret" },
-{ name: "La Grande Combinasion", value: 0.10, img: "images/214.png", rarity: "Secret" },
-{ name: "Los Nooo My Hotspotsitos", value: 0.25, img: "images/215.png", rarity: "Secret" },
-{ name: "Noo my Present", value: 0.25, img: "images/216.png", rarity: "Secret" },
-{ name: "Guest 666", value: 0.70, img: "images/217.png", rarity: "Secret" },
-{ name: "Rang Ring Bus", value: 0.30, img: "images/218.png", rarity: "Secret" },
-{ name: "Strawberrita", value: 0.20, img: "images/333.png", rarity: "Secret" },
-{ name: "Los Mi Gatitos", value: 0.35, img: "images/219.png", rarity: "Secret" },
-{ name: "Noo my Eggs", value: 0.20, img: "images/220.png", rarity: "Secret" },
-{ name: "Los Chicleteiras", value: 0.20, img: "images/221.png", rarity: "Secret" },
-{ name: "John Doe", value: 0.55, img: "images/391.png", rarity: "Secret" },
-{ name: "67", value: 0.20, img: "images/222.png", rarity: "Secret" },
-{ name: "Donkeyturbo Express ", value: 0.40, img: "images/223.png", rarity: "Secret" },
-{ name: "Los Burritos", value: 0.30, img: "images/224.png", rarity: "Secret" },
-{ name: "Los 25", value: 0.35, img: "images/225.png", rarity: "Secret" },
-{ name: "Tacorillo Crocodillo", value: 0.30, img: "images/226.png", rarity: "Secret" },
-{ name: "Mariachi Corazoni", value: 0.40, img: "images/227.png", rarity: "Secret" },
-{ name: "Noo my Heart", value: 0.20, img: "images/228.png", rarity: "Secret" },
-{ name: "Swag Soda", value: 0.50, img: "images/229.png", rarity: "Secret" },
-{ name: "Noo my Gold", value: 0.25, img: "images/230.png", rarity: "Secret" },
-{ name: "Chimnino", value: 0.30, img: "images/231.png", rarity: "Secret" },
-{ name: "Bananito", value: 0.30, img: "images/334.png", rarity: "Secret" },
-{ name: "Chicleteira Noelteira", value: 0.40, img: "images/232.png", rarity: "Secret" },
-{ name: "Los Combinasionas", value: 0.30, img: "images/233.png", rarity: "Secret" },
-{ name: "Fishino Clownino", value: 1, img: "images/234.png", rarity: "Secret" },
-{ name: "Baskito", value: 0.40, img: "images/235.png", rarity: "Secret" },
-{ name: "Los Sweethearts", value: 0.40, img: "images/236.png", rarity: "Secret" },
-{ name: "Tacorita Bicicleta", value: 0.60, img: "images/237.png", rarity: "Secret" },
-{ name: "Camera Ramena", value: 0.25, img: "images/366.png", rarity: "Secret" },
-{ name: "Spinny Hammy", value: 0.25, img: "images/238.png", rarity: "Secret" },
-{ name: "Nuclearo Dinossauro", value: 0.40, img: "images/239.png", rarity: "Secret" },
-{ name: "DJ Panda", value: 0.30, img: "images/240.png", rarity: "Secret" },
-{ name: "Las Sis", value: 0.50, img: "images/241.png", rarity: "Secret" },
-{ name: "Chicleteira Cupideira", value: 0.55, img: "images/242.png", rarity: "Secret" },
-{ name: "Chillin Chili", value: 1, img: "images/243.png", rarity: "Secret" },
-{ name: "Money Money Reindeer", value: 0.70, img: "images/244.png", rarity: "Secret" },
-{ name: "Chipso and Queso", value: 0.60, img: "images/245.png", rarity: "Secret" },
-{ name: "Los Bros", value: 0.50, img: "images/246.png", rarity: "Secret" },
-{ name: "Money Money Puggy", value: 0.35, img: "images/247.png", rarity: "Secret" },
-{ name: "Churrito Bunnito", value: 0.60, img: "images/248.png", rarity: "Secret" },
-{ name: "Los Planitos", value: 0.50, img: "images/249.png", rarity: "Secret" },
-{ name: "Snailo Clovero", value: 0.55, img: "images/250.png", rarity: "Secret" },
-{ name: "Los Mobilis", value: 0.30, img: "images/251.png", rarity: "Secret" },
-{ name: "Celularcini Viciosini", value: 1.5, img: "images/252.png", rarity: "Secret" },
-{ name: "Los 67", value: 0.40, img: "images/253.png", rarity: "Secret" },
-{ name: "Tuff Toucan", value: 0.60, img: "images/254.png", rarity: "Secret" },
-{ name: "Mieteteira Bicicleteira", value: 0.40, img: "images/255.png", rarity: "Secret" },
-{ name: "Gobblino Uniciclino", value: 1, img: "images/256.png", rarity: "Secret" },
-{ name: "La Spooky Grande", value: 0.35, img: "images/257.png", rarity: "Secret" },
-{ name: "Los Jolly Combinasionas", value: 0.60, img: "images/258.png", rarity: "Secret" },
-{ name: "Cigno Fulgoro", value: 0.30, img: "images/259.png", rarity: "Secret" },
-{ name: "Los Spooky Combinasionas", value: 0.35, img: "images/260.png", rarity: "Secret" },
-{ name: "Los Hotspotsitos", value: 2, img: "images/261.png", rarity: "Secret" },
-{ name: "Los Candies", value: 0.40, img: "images/262.png", rarity: "Secret" },
-{ name: "Globa Steppa", value: 4, img: "images/335.png", rarity: "Secret" },
-{ name: "Tralaledon", value: 1, img: "images/263.png", rarity: "Secret" },
-{ name: "Los Cupids", value: 0.50, img: "images/264.png", rarity: "Secret" },
-{ name: "Los Puggies", value: 0.50, img: "images/265.png", rarity: "Secret" },
-{ name: "W or L", value: 0.60, img: "images/266.png", rarity: "Secret" },
-{ name: "La Extinct Grande", value: 0.30, img: "images/267.png", rarity: "Secret" },
-{ name: "Esok Sekolah", value: 0.30, img: "images/268.png", rarity: "Secret" },
-{ name: "La Jolly Grande", value: 0.40, img: "images/269.png", rarity: "Secret" },
-{ name: "Los Primos", value: 2, img: "images/270.png", rarity: "Secret" },
-{ name: "Bacuru and Egguru", value: 0.30, img: "images/271.png", rarity: "Secret" },
-{ name: "Eviledon", value: 0.60, img: "images/272.png", rarity: "Secret" },
-{ name: "Los Tacoritas", value: 4, img: "images/273.png", rarity: "Secret" },
-{ name: "Lovin Rose", value: 1, img: "images/274.png", rarity: "Secret" },
-{ name: "Tang Tang Keletang", value: 0.45, img: "images/275.png", rarity: "Secret" },
-{ name: "Ketupat Kepat", value: 0.50, img: "images/276.png", rarity: "Secret" },
-{ name: "La Taco Combinasion", value: 0.50, img: "images/277.png", rarity: "Secret" },
-{ name: "Dug Dug Dug", value: 6, img: "images/278.png", rarity: "Secret" },
-{ name: "Tictac Sahur", value: 0.80, img: "images/279.png", rarity: "Secret" },
-{ name: "Swaggy Bros", value: 0.50, img: "images/280.png", rarity: "Secret" },
-{ name: "La Romantic Grande", value: 0.70, img: "images/281.png", rarity: "Secret" },
-{ name: "Orcaledon", value: 1, img: "images/282.png", rarity: "Secret" },
-{ name: "Gym Bros", value: 3.5, img: "images/367.png", rarity: "Secret" },
-{ name: "Tirilikalika Tirilikalako", value: 14, img: "images/388.png", rarity: "Secret" },
-{ name: "Rico Dinero", value: 12, img: "images/336.png", rarity: "Secret" },
-{ name: "Ketchuru And Musturu ", value: 0.60, img: "images/283.png", rarity: "Secret" },
-{ name: "Jolly Jolly Sahur", value: 1, img: "images/284.png", rarity: "Secret" },
-{ name: "Elefanto frigo", value: 48, img: "images/351.png", rarity: "Secret" },
-{ name: "Gold Gold Gold", value: 0.70, img: "images/285.png", rarity: "Secret" },
-{ name: "Money Money Bros", value: 0.60, img: "images/392.png", rarity: "Secret" },
-{ name: "Nacho Spyder", value: 0.70, img: "images/286.png", rarity: "Secret" },
-{ name: "Rosetti Tualetti", value: 1, img: "images/287.png", rarity: "Secret" },
-{ name: "Garama and Madundung", value: 1, img: "images/288.png", rarity: "Secret" },
-{ name: "Antonio", value: 12, img: "images/289.png", rarity: "Secret" },
-{ name: "Hopilikalika Hopilikalako", value: 2, img: "images/290.png", rarity: "Secret" },
-{ name: "Cloverat Clapat", value: 3, img: "images/291.png", rarity: "Secret" },
-{ name: "Spaghetti Tualetti", value: 0.40, img: "images/292.png", rarity: "Secret" },
-{ name: "Ventoliero Pavonero", value: 0.60, img: "images/293.png", rarity: "Secret" },
-{ name: "Quackini Snackini", value: 2, img: "images/294.png", rarity: "Secret" },
-{ name: "Festive 67", value: 2.5, img: "images/295.png", rarity: "Secret" },
-{ name: "Los Spaghettis", value: 2, img: "images/296.png", rarity: "Secret" },
-{ name: "Sammyni Fattini", value: 2, img: "images/297.png", rarity: "Secret" },
-{ name: "Los Hackers", value: 1.6, img: "images/393.png", rarity: "Secret" },
-{ name: "Los Chillis", value: 2.7, img: "images/386.png", rarity: "Secret" },
-{ name: "Ginger Gerat", value: 8, img: "images/298.png", rarity: "Secret" },
-{ name: "La Ginger Sekolah", value: 2, img: "images/299.png", rarity: "Secret" },
-{ name: "Boppin Bunny", value: 2.5, img: "images/300.png", rarity: "Secret" },
-{ name: "Spooky and Pumpky", value: 3, img: "images/301.png", rarity: "Secret" },
-{ name: "Lavadorito Spinito", value: 0.4, img: "images/302.png", rarity: "Secret" },
-{ name: "Duggy Bros", value: 7, img: "images/394.png", rarity: "Secret" },
-{ name: "La Food Combinasion", value: 2, img: "images/303.png", rarity: "Secret" },
-{ name: "Cash or Card", value: 5, img: "images/337.png", rarity: "Secret" },
-{ name: "Fragrama and Chocrama", value: 4, img: "images/304.png", rarity: "Secret" },
-{ name: "La Casa Boo", value: 3, img: "images/305.png", rarity: "Secret" },
-{ name: "Signore Carapace", value: 143, img: "images/350.png", rarity: "Secret" },
-{ name: "Los Sekolahs", value: 3, img: "images/306.png", rarity: "Secret" },
-{ name: "Kalika Bros", value: 16.5, img: "images/368.png", rarity: "Secret" },
-{ name: "Foxini Lanternini", value: 5, img: "images/307.png", rarity: "Secret" },
-{ name: "La Secret Combinasion", value: 1, img: "images/308.png", rarity: "Secret" },
-{ name: "Fortunu and Cashuru", value: 3, img: "images/309.png", rarity: "Secret" },
-{ name: "Los Amigos", value: 2, img: "images/310.png", rarity: "Secret" },
-{ name: "Reinito Sleighito", value: 4, img: "images/311.png", rarity: "Secret" },
-{ name: "Ketupat Bros", value: 10, img: "images/312.png", rarity: "Secret" },
-{ name: "Burguro And Fryuro", value: 3, img: "images/313.png", rarity: "Secret" },
-{ name: "Pancake and Syrup", value: 144, img: "images/338.png", rarity: "Secret" },
-{ name: "Cooki and Milki", value: 3, img: "images/314.png", rarity: "Secret" },
-{ name: "Capitano Moby", value: 3, img: "images/315.png", rarity: "Secret" },
-{ name: "Rosey and Teddy", value: 8, img: "images/316.png", rarity: "Secret" },
-{ name: "Popcuru and Fizzuru", value: 2, img: "images/317.png", rarity: "Secret" },
-{ name: "Cerberus", value: 5, img: "images/318.png", rarity: "Secret" },
-{ name: "Celestial Pegasus", value: 2, img: "images/319.png", rarity: "Secret" },
-{ name: "Arcadragon", value:  576, img: "images/339.png", rarity: "Secret" },
-{ name: "Hydra Bunny", value: 10, img: "images/320.png", rarity: "Secret" },
-{ name: "Bunny and Eggy", value: 2.5, img: "images/321.png", rarity: "Secret" },
-{ name: "La Supreme Combinasion", value: 26, img: "images/352.png", rarity: "Secret" },
-{ name: "Digi Narwhal", value: 17.5, img: "images/369.png", rarity: "Secret" },
-{ name: "Love Love Bear", value: 144, img: "images/322.png", rarity: "Secret" },
-{ name: "Dragon Cannelloni", value: 12, img: "images/323.png", rarity: "Secret" },
-{ name: "Dragon Gingerini", value: 48, img: "images/324.png", rarity: "Secret" },
-{ name: "Hydra Dragon Cannelloni", value: 10, img: "images/325.png", rarity: "Secret" },
-{ name: "Griffin", value: 24, img: "images/326.png", rarity: "Secret" },
-{ name: "Skibidi Toilet", value: 72, img: "images/327.png", rarity: "OG" },
-{ name: "John Pork", value: 144, img: "images/381.png", rarity: "OG" },
-{ name: "Headless Horseman", value: 720, img: "images/328.png", rarity: "OG" },
-{ name: "Meowl", value: 216, img: "images/329.png", rarity: "OG" },
-{ name: "Strawberry Elephant", value: 288, img: "images/strawberry-elephant.png", rarity: "OG" },
- ];
+  { name: "Bisonte Giuppitere", value: 0.10, img: "images/122.png", rarity: "Secret" },
+  { name: "Sammyni Spyderini", value: 0.10, img: "images/123.png", rarity: "Secret" },
+  { name: "Blackhole Goat", value: 0.10, img: "images/124.png", rarity: "Secret" },
+  { name: "Pretzo Robo", value: 0.10, img: "images/364.png", rarity: "Secret" },
+  { name: "Jackorilla", value: 0.10, img: "images/125.png", rarity: "Secret" },
+  { name: "Karkerkar Kurkur", value: 0.10, img: "images/126.png", rarity: "Secret" },
+  { name: "Agarrini La Palini", value: 0.10, img: "images/127.png", rarity: "Secret" },
+  { name: "Chachechi", value: 0.10, img: "images/128.png", rarity: "Secret" },
+  { name: "Trenostruzzo Turbo 4000", value: 0.10, img: "images/129.png", rarity: "Secret" },
+  { name: "Los Matteos", value: 0.10, img: "images/131.png", rarity: "Secret" },
+  { name: "Los Tortus", value: 0.10, img: "images/132.png", rarity: "Secret" },
+  { name: "Los Tralaleritos", value: 0.10, img: "images/133.png", rarity: "Secret" },
+  { name: "La Cucaracha", value: 0.10, img: "images/134.png", rarity: "Secret" },
+  { name: "Vulturino Skeletono", value: 0.10, img: "images/135.png", rarity: "Secret" },
+  { name: "Boatito Auratito", value: 0.10, img: "images/136.png", rarity: "Secret" },
+  { name: "Torrtuginni Dragonfrutini ", value: 0.10, img: "images/137.png", rarity: "Secret" },
+  { name: "Los Spyderinis", value: 0.10, img: "images/138.png", rarity: "Secret" },
+  { name: "Extinct Tralalero", value: 0.10, img: "images/139.png", rarity: "Secret" },
+  { name: "Fragola La La La", value: 3.5, img: "images/140.png", rarity: "Secret" },
+  { name: "Zombie Tralala", value: 0.10, img: "images/141.png", rarity: "Secret" },
+  { name: "Yess my examine", value: 0.10, img: "images/142.png", rarity: "Secret" },
+  { name: "Extinct Matteo", value: 0.10, img: "images/143.png", rarity: "Secret" },
+  { name: "Dul Dul Dul", value: 0.10, img: "images/144.png", rarity: "Secret" },
+  { name: "Guerriro Digitale", value: 0.10, img: "images/145.png", rarity: "Secret" },
+  { name: "Las Tralaleritas", value: 0.10, img: "images/146.png", rarity: "Secret" },
+  { name: "Rocco Disco", value: 0.10, img: "images/147.png", rarity: "Secret" },
+  { name: "La Karkerkar Combinasion", value: 0.10, img: "images/148.png", rarity: "Secret" },
+  { name: "La Vacca Prese Presente", value: 0.10, img: "images/149.png", rarity: "Secret" },
+  { name: "Reindeer Tralala", value: 0.10, img: "images/150.png", rarity: "Secret" },
+  { name: "Pumpkini Spyderini", value: 0.10, img: "images/151.png", rarity: "Secret" },
+  { name: "Los Trios", value: 0.10, img: "images/152.png", rarity: "Secret" },
+  { name: "Frankentteo", value: 0.10, img: "images/153.png", rarity: "Secret" },
+  { name: "Job Job Job Sahur", value: 0.10, img: "images/154.png", rarity: "Secret" },
+  { name: "Karker Sahur", value: 0.10, img: "images/155.png", rarity: "Secret" },
+  { name: "Las Vaquitas Saturnitas", value: 0.10, img: "images/156.png", rarity: "Secret" },
+  { name: "Los Karkeritos", value: 0.10, img: "images/157.png", rarity: "Secret" },
+  { name: "Santteo", value: 0.10, img: "images/158.png", rarity: "Secret" },
+  { name: "Fishboard", value: 0.10, img: "images/159.png", rarity: "Secret" },
+  { name: "Buntteo", value: 0.10, img: "images/160.png", rarity: "Secret" },
+  { name: "La Vacca Jacko Linterino", value: 0.10, img: "images/161.png", rarity: "Secret" },
+  { name: "Triplito Tralaleritos", value: 0.10, img: "images/162.png", rarity: "Secret" },
+  { name: "Paradiso Axolottino", value: 0.10, img: "images/163.png", rarity: "Secret" },
+  { name: "Trickolino", value: 0.10, img: "images/164.png", rarity: "Secret" },
+  { name: "GOAT", value: 0.10, img: "images/165.png", rarity: "Secret" },
+  { name: "Giftini Spyderini", value: 0.10, img: "images/166.png", rarity: "Secret" },
+  { name: "Love Love Love Sahur", value: 0.10, img: "images/167.png", rarity: "Secret" },
+  { name: "Graipuss Medussi", value: 0.10, img: "images/168.png", rarity: "Secret" },
+  { name: "Perrito Burrito", value: 0.10, img: "images/169.png", rarity: "Secret" },
+  { name: "La Vacca Lepre Lepreino", value: 0.10, img: "images/170.png", rarity: "Secret" },
+  { name: "1x1x1x1", value: 0.10, img: "images/171.png", rarity: "Secret" },
+  { name: "Easter Easter Easter Sahur", value: 0.10, img: "images/172.png", rarity: "Secret" },
+  { name: "Los Cucarachas", value: 0.10, img: "images/173.png", rarity: "Secret" },
+  { name: "Please my Present", value: 0.10, img: "images/174.png", rarity: "Secret" },
+  { name: "Cuadramat and Pakrahmatmamat", value: 0.10, img: "images/175.png", rarity: "Secret" },
+  { name: "Berryno", value: 0.10, img: "images/332.png", rarity: "Secret" },
+  { name: "Bunnyman", value: 0.10, img: "images/176.png", rarity: "Secret" },
+  { name: "Tung Tung Tung Sahur", value: 0.10, img: "images/178.png", rarity: "Secret" },
+  { name: "Los Jobcitos", value: 0.10, img: "images/179.png", rarity: "Secret" },
+  { name: "Nooo My Hotspot", value: 0.10, img: "images/180.png", rarity: "Secret" },
+  { name: "Noo my examine", value: 0.10, img: "images/181.png", rarity: "Secret" },
+  { name: "La Sahur Combinasion", value: 0.10, img: "images/182.png", rarity: "Secret" },
+  { name: "List List List Sahur", value: 0.10, img: "images/183.png", rarity: "Secret" },
+  { name: "Telemorte", value: 0.10, img: "images/184.png", rarity: "Secret" },
+  { name: "Bunny Bunny Bunny Sahur", value: 0.10, img: "images/185.png", rarity: "Secret" },
+  { name: "To to to Sahur", value: 0.10, img: "images/186.png", rarity: "Secret" },
+  { name: "Glaciator", value: 0.11, img: "images/373.png", rarity: "Secret" },
+  { name: "Pirulitoita Bicicleteira", value: 0.10, img: "images/187.png", rarity: "Secret" },
+  { name: "25", value: 0.10, img: "images/188.png", rarity: "Secret" },
+  { name: "Pot Hotspot", value: 0.10, img: "images/189.png", rarity: "Secret" },
+  { name: "Santa Hotspot", value: 0.10, img: "images/190.png", rarity: "Secret" },
+  { name: "Buho De Volto", value: 0.10, img: "images/365.png", rarity: "Secret" },
+  { name: "Horegini Boom", value: 0.10, img: "images/191.png", rarity: "Secret" },
+  { name: "Pot Pumpkin", value: 0.10, img: "images/192.png", rarity: "Secret" },
+  { name: "Naughty Naughty", value: 0.10, img: "images/193.png", rarity: "Secret" },
+  { name: "Quesadilla Crocodila", value: 0.10, img: "images/194.png", rarity: "Secret" },
+  { name: "Cupid Cupid Sahur", value: 0.10, img: "images/195.png", rarity: "Secret" },
+  { name: "Mi Gatito", value: 0.10, img: "images/196.png", rarity: "Secret" },
+  { name: "Ho Ho Ho Sahur", value: 0.10, img: "images/197.png", rarity: "Secret" },
+  { name: "Cupid Hotspot", value: 0.10, img: "images/198.png", rarity: "Secret" },
+  { name: "Eid Eid Eid Sahur", value: 0.10, img: "images/199.png", rarity: "Secret" },
+  { name: "Chicleteira Bicicleteira", value: 0.10, img: "images/200.png", rarity: "Secret" },
+  { name: "Brunito Marsito", value: 0.10, img: "images/201.png", rarity: "Secret" },
+  { name: "Quesadillo Vampiro", value: 0.10, img: "images/202.png", rarity: "Secret" },
+  { name: "Luck Luck Luck Sahur", value: 0.10, img: "images/203.png", rarity: "Secret" },
+  { name: "Granny", value: 0.10, img: "images/204.png", rarity: "Secret" },
+  { name: "Chicleteirina Bicicleteirina", value: 0.10, img: "images/205.png", rarity: "Secret" },
+  { name: "Burrito Bandito", value: 0.10, img: "images/206.png", rarity: "Secret" },
+  { name: "Chill Puppy", value: 0.10, img: "images/207.png", rarity: "Secret" },
+  { name: "Los Bunitos", value: 0.10, img: "images/208.png", rarity: "Secret" },
+  { name: "Bunito Bunito Spinito", value: 0.10, img: "images/209.png", rarity: "Secret" },
+  { name: "Los Quesadillas", value: 0.10, img: "images/210.png", rarity: "Secret" },
+  { name: "Futbolini Skatini", value: 0.24, img: "images/390.png", rarity: "Secret" },
+  { name: "Arcadopus", value: 0.10, img: "images/211.png", rarity: "Secret" },
+  { name: "Noo my candy", value: 0.10, img: "images/212.png", rarity: "Secret" },
+  { name: "Serafinna Medusella", value: 0.10, img: "images/213.png", rarity: "Secret" },
+  { name: "La Grande Combinasion", value: 0.10, img: "images/214.png", rarity: "Secret" },
+  { name: "Los Nooo My Hotspotsitos", value: 0.25, img: "images/215.png", rarity: "Secret" },
+  { name: "Flipa Sandala", value: 0.49, img: "images/372.png", rarity: "Secret" },
+  { name: "Noo my Present", value: 0.25, img: "images/216.png", rarity: "Secret" },
+  { name: "Guest 666", value: 0.70, img: "images/217.png", rarity: "Secret" },
+  { name: "Rang Ring Bus", value: 0.30, img: "images/218.png", rarity: "Secret" },
+  { name: "Strawberrita", value: 0.20, img: "images/333.png", rarity: "Secret" },
+  { name: "Los Mi Gatitos", value: 0.35, img: "images/219.png", rarity: "Secret" },
+  { name: "Noo my Eggs", value: 0.20, img: "images/220.png", rarity: "Secret" },
+  { name: "Los Chicleteiras", value: 0.20, img: "images/221.png", rarity: "Secret" },
+  { name: "John Doe", value: 0.55, img: "images/391.png", rarity: "Secret" },
+  { name: "67", value: 0.20, img: "images/222.png", rarity: "Secret" },
+  { name: "Donkeyturbo Express ", value: 0.40, img: "images/223.png", rarity: "Secret" },
+  { name: "Los Burritos", value: 0.30, img: "images/224.png", rarity: "Secret" },
+  { name: "Los 25", value: 0.35, img: "images/225.png", rarity: "Secret" },
+  { name: "Tacorillo Crocodillo", value: 0.30, img: "images/226.png", rarity: "Secret" },
+  { name: "Mariachi Corazoni", value: 0.40, img: "images/227.png", rarity: "Secret" },
+  { name: "Noo my Heart", value: 0.20, img: "images/228.png", rarity: "Secret" },
+  { name: "Swag Soda", value: 0.50, img: "images/229.png", rarity: "Secret" },
+  { name: "Noo my Gold", value: 0.25, img: "images/230.png", rarity: "Secret" },
+  { name: "Chimnino", value: 0.30, img: "images/231.png", rarity: "Secret" },
+  { name: "Bananito", value: 0.30, img: "images/334.png", rarity: "Secret" },
+  { name: "Chicleteira Noelteira", value: 0.40, img: "images/232.png", rarity: "Secret" },
+  { name: "Los Combinasionas", value: 0.30, img: "images/233.png", rarity: "Secret" },
+  { name: "Fishino Clownino", value: 10, img: "images/234.png", rarity: "Secret" },
+  { name: "Baskito", value: 0.40, img: "images/235.png", rarity: "Secret" },
+  { name: "Los Sweethearts", value: 0.40, img: "images/236.png", rarity: "Secret" },
+  { name: "Tacorita Bicicleta", value: 0.60, img: "images/237.png", rarity: "Secret" },
+  { name: "Camera Ramena", value: 0.25, img: "images/366.png", rarity: "Secret" },
+  { name: "Spinny Hammy", value: 0.25, img: "images/238.png", rarity: "Secret" },
+  { name: "Nuclearo Dinossauro", value: 0.40, img: "images/239.png", rarity: "Secret" },
+  { name: "DJ Panda", value: 0.30, img: "images/240.png", rarity: "Secret" },
+  { name: "Las Sis", value: 0.50, img: "images/241.png", rarity: "Secret" },
+  { name: "Chicleteira Cupideira", value: 0.55, img: "images/242.png", rarity: "Secret" },
+  { name: "Chillin Chili", value: 1, img: "images/243.png", rarity: "Secret" },
+  { name: "Money Money Reindeer", value: 0.70, img: "images/244.png", rarity: "Secret" },
+  { name: "Chipso and Queso", value: 0.60, img: "images/245.png", rarity: "Secret" },
+  { name: "Los Bros", value: 0.50, img: "images/246.png", rarity: "Secret" },
+  { name: "Money Money Puggy", value: 0.35, img: "images/247.png", rarity: "Secret" },
+  { name: "Churrito Bunnito", value: 0.60, img: "images/248.png", rarity: "Secret" },
+  { name: "Los Planitos", value: 0.50, img: "images/249.png", rarity: "Secret" },
+  { name: "Snailo Clovero", value: 0.55, img: "images/250.png", rarity: "Secret" },
+  { name: "Los Mobilis", value: 0.30, img: "images/251.png", rarity: "Secret" },
+  { name: "Celularcini Viciosini", value: 1.5, img: "images/252.png", rarity: "Secret" },
+  { name: "Los 67", value: 0.40, img: "images/253.png", rarity: "Secret" },
+  { name: "Tuff Toucan", value: 0.60, img: "images/254.png", rarity: "Secret" },
+  { name: "Mieteteira Bicicleteira", value: 0.40, img: "images/255.png", rarity: "Secret" },
+  { name: "Gobblino Uniciclino", value: 1, img: "images/256.png", rarity: "Secret" },
+  { name: "La Spooky Grande", value: 0.35, img: "images/257.png", rarity: "Secret" },
+  { name: "Los Jolly Combinasionas", value: 0.60, img: "images/258.png", rarity: "Secret" },
+  { name: "Cigno Fulgoro", value: 0.30, img: "images/259.png", rarity: "Secret" },
+  { name: "Los Spooky Combinasionas", value: 0.35, img: "images/260.png", rarity: "Secret" },
+  { name: "Los Hotspotsitos", value: 2, img: "images/261.png", rarity: "Secret" },
+  { name: "Los Candies", value: 0.40, img: "images/262.png", rarity: "Secret" },
+  { name: "Globa Steppa", value: 4, img: "images/335.png", rarity: "Secret" },
+  { name: "Tralaledon", value: 1, img: "images/263.png", rarity: "Secret" },
+  { name: "Los Cupids", value: 0.50, img: "images/264.png", rarity: "Secret" },
+  { name: "Los Puggies", value: 0.50, img: "images/265.png", rarity: "Secret" },
+  { name: "W or L", value: 0.60, img: "images/266.png", rarity: "Secret" },
+  { name: "La Extinct Grande", value: 0.30, img: "images/267.png", rarity: "Secret" },
+  { name: "Esok Sekolah", value: 0.30, img: "images/268.png", rarity: "Secret" },
+  { name: "La Jolly Grande", value: 0.40, img: "images/269.png", rarity: "Secret" },
+  { name: "Los Primos", value: 2, img: "images/270.png", rarity: "Secret" },
+  { name: "Bacuru and Egguru", value: 0.30, img: "images/271.png", rarity: "Secret" },
+  { name: "Eviledon", value: 0.60, img: "images/272.png", rarity: "Secret" },
+  { name: "Los Tacoritas", value: 4, img: "images/273.png", rarity: "Secret" },
+  { name: "Lovin Rose", value: 1, img: "images/274.png", rarity: "Secret" },
+  { name: "Abyssaloco", value: 1.5, img: "images/371.png", rarity: "Secret" },
+  { name: "Tang Tang Keletang", value: 0.45, img: "images/275.png", rarity: "Secret" },
+  { name: "Ketupat Kepat", value: 0.50, img: "images/276.png", rarity: "Secret" },
+  { name: "La Taco Combinasion", value: 0.50, img: "images/277.png", rarity: "Secret" },
+  { name: "Dug Dug Dug", value: 6, img: "images/278.png", rarity: "Secret" },
+  { name: "Tictac Sahur", value: 0.80, img: "images/279.png", rarity: "Secret" },
+  { name: "Swaggy Bros", value: 0.50, img: "images/280.png", rarity: "Secret" },
+  { name: "La Romantic Grande", value: 0.70, img: "images/281.png", rarity: "Secret" },
+  { name: "Orcaledon", value: 1, img: "images/282.png", rarity: "Secret" },
+  { name: "Gym Bros", value: 4.6, img: "images/367.png", rarity: "Secret" },
+  { name: "Tirilikalika Tirilikalako", value: 14, img: "images/388.png", rarity: "Secret" },
+  { name: "Rico Dinero", value: 12, img: "images/336.png", rarity: "Secret" },
+  { name: "Ketchuru And Musturu ", value: 0.60, img: "images/283.png", rarity: "Secret" },
+  { name: "Jolly Jolly Sahur", value: 1, img: "images/284.png", rarity: "Secret" },
+  { name: "Elefanto frigo", value: 48, img: "images/351.png", rarity: "Secret" },
+  { name: "Gold Gold Gold", value: 0.70, img: "images/285.png", rarity: "Secret" },
+  { name: "Money Money Bros", value: 0.60, img: "images/392.png", rarity: "Secret" },
+  { name: "La Anniversary Grande", value: 1.6, img: "images/377.png", rarity: "Secret" },
+  { name: "Nacho Spyder", value: 0.70, img: "images/286.png", rarity: "Secret" },
+  { name: "Rosetti Tualetti", value: 1, img: "images/287.png", rarity: "Secret" },
+  { name: "Garama and Madundung", value: 1, img: "images/288.png", rarity: "Secret" },
+  { name: "Antonio", value: 12, img: "images/289.png", rarity: "Secret" },
+  { name: "Hopilikalika Hopilikalako", value: 2, img: "images/290.png", rarity: "Secret" },
+  { name: "Cloverat Clapat", value: 3, img: "images/291.png", rarity: "Secret" },
+  { name: "Spaghetti Tualetti", value: 0.40, img: "images/292.png", rarity: "Secret" },
+  { name: "Ventoliero Pavonero", value: 0.60, img: "images/293.png", rarity: "Secret" },
+  { name: "Quackini Snackini", value: 2, img: "images/294.png", rarity: "Secret" },
+  { name: "Festive 67", value: 2.5, img: "images/295.png", rarity: "Secret" },
+  { name: "Rubrikiko", value: 3, img: "images/370.png", rarity: "Secret" },
+  { name: "Los Spaghettis", value: 2, img: "images/296.png", rarity: "Secret" },
+  { name: "Sammyni Fattini", value: 2, img: "images/297.png", rarity: "Secret" },
+  { name: "Los Hackers de Los Angeles", value: 1.6, img: "images/393.png", rarity: "Secret" },
+  { name: "Los Chillis", value: 2.7, img: "images/386.png", rarity: "Secret" },
+  { name: "Ginger Gerat", value: 8, img: "images/298.png", rarity: "Secret" },
+  { name: "La Ginger Sekolah", value: 2, img: "images/299.png", rarity: "Secret" },
+  { name: "Boppin Bunny", value: 2.5, img: "images/300.png", rarity: "Secret" },
+  { name: "Spooky and Pumpky", value: 3, img: "images/301.png", rarity: "Secret" },
+  { name: "Sammy anniv", value: 8, img: "images/376.png", rarity: "Secret" },
+  { name: "Lavadorito Spinito", value: 0.4, img: "images/302.png", rarity: "Secret" },
+  { name: "Duggy Bros", value: 7, img: "images/394.png", rarity: "Secret" },
+  { name: "La Food Combinasion", value: 2, img: "images/303.png", rarity: "Secret" },
+  { name: "Cash or Card", value: 5, img: "images/337.png", rarity: "Secret" },
+  { name: "Fragrama and Chocrama", value: 4, img: "images/304.png", rarity: "Secret" },
+  { name: "La Casa Boo", value: 3, img: "images/305.png", rarity: "Secret" },
+  { name: "Signore Carapace", value: 143, img: "images/350.png", rarity: "Secret" },
+  { name: "Los Sekolahs", value: 3, img: "images/306.png", rarity: "Secret" },
+  { name: "Kalika Bros", value: 16.5, img: "images/368.png", rarity: "Secret" },
+  { name: "Foxini Lanternini", value: 5, img: "images/307.png", rarity: "Secret" },
+  { name: "La Secret Combinasion", value: 1, img: "images/308.png", rarity: "Secret" },
+  { name: "Fortunu and Cashuru", value: 3, img: "images/309.png", rarity: "Secret" },
+  { name: "Los Amigos", value: 2, img: "images/310.png", rarity: "Secret" },
+  { name: "Reinito Sleighito", value: 4, img: "images/311.png", rarity: "Secret" },
+  { name: "Ketupat Bros", value: 10, img: "images/312.png", rarity: "Secret" },
+  { name: "Burguro And Fryuro", value: 3, img: "images/313.png", rarity: "Secret" },
+  { name: "Pancake and Syrup", value: 144, img: "images/338.png", rarity: "Secret" },
+  { name: "Cooki and Milki", value: 3, img: "images/314.png", rarity: "Secret" },
+  { name: "Capitano Moby", value: 3, img: "images/315.png", rarity: "Secret" },
+  { name: "Rosey and Teddy", value: 8, img: "images/316.png", rarity: "Secret" },
+  { name: "Popcuru and Fizzuru", value: 2, img: "images/317.png", rarity: "Secret" },
+  { name: "Cerberus", value: 5, img: "images/318.png", rarity: "Secret" },
+  { name: "Jelly Moby", value: 8, img: "images/pinealotto-fruttarino.png", rarity: "Secret" },
+  { name: "Celestial Pegasus", value: 2, img: "images/319.png", rarity: "Secret" },
+  { name: "Arcadragon", value: 576, img: "images/339.png", rarity: "Secret" },
+  { name: "Hydra Bunny", value: 10, img: "images/320.png", rarity: "Secret" },
+  { name: "Bunny and Eggy", value: 2.5, img: "images/321.png", rarity: "Secret" },
+  { name: "La Supreme Combinasion", value: 22, img: "images/352.png", rarity: "Secret" },
+  { name: "Digi Narwhal", value: 17.5, img: "images/369.png", rarity: "Secret" },
+  { name: "Love Love Bear", value: 49, img: "images/322.png", rarity: "Secret" },
+  { name: "Dragon Cannelloni", value: 12, img: "images/323.png", rarity: "Secret" },
+  { name: "Dragon Gingerini", value: 48, img: "images/324.png", rarity: "Secret" },
+  { name: "Hydra Dragon Cannelloni", value: 10, img: "images/325.png", rarity: "Secret" },
+  { name: "Griffin", value: 24, img: "images/326.png", rarity: "Secret" },
+  { name: "Skibidi Toilet", value: 72, img: "images/327.png", rarity: "OG" },
+  { name: "John Pork", value: 144, img: "images/381.png", rarity: "OG" },
+  { name: "Headless Horseman", value: 720, img: "images/328.png", rarity: "OG" },
+  { name: "Meowl", value: 216, img: "images/329.png", rarity: "OG" },
+  { name: "Strawberry Elephant", value: 288, img: "images/strawberry-elephant.png", rarity: "OG" },
+];
 
 
 /* ===== RESTE DU SCRIPT (INCHANGE + PATCHES) ===== */
@@ -705,7 +1989,7 @@ const mutations = [
 const mutationValues = {
   "Gold":1.2,"Diamond":1.5,"Rainbow":2,"Bloodroot":2.7,
   "Candy":2.6,"Lava":2.4,"Galaxy":2.2,"Yin Yang":3,
-  "Radioactive":2.5,"Cursed":3.2,"Divine":2.3,"Cyber":2.6
+  "Radioactive":2.3,"Cursed":3.2,"Divine":2.5,"Cyber":2.6
 };
 
 const traits = [
@@ -826,174 +2110,817 @@ const traitsValues = {
   "Indonesie": 1.4,
   "Granny": 1.3,
 };
-let currentContainer=null;
-let selectedBrainrot=null;
-let selectedMutation=null;
 
-/* PICKER */
-function openPicker(id){
-  currentContainer=id;
-  document.getElementById("picker").style.display="block";
-  loadPicker();
-}
+let current = null;
+let currentFilter = "All";
 
-function closePicker(){
-  document.getElementById("picker").style.display="none";
-}
+let yourItems = [];
+let theirItems = [];
 
-function loadPicker(){
-  let grid=document.getElementById("grid");
-  grid.innerHTML="";
+let popularCounts =
+JSON.parse(localStorage.getItem("popularCounts")) || {};
 
-  let search=document.getElementById("searchBrainrot").value.toLowerCase();
+let selectedIndex = null;
+let selectedMutation = null;
 
-  brainrots.forEach((b,i)=>{
-    if(!b.name.toLowerCase().includes(search)) return;
+/* ===== MUTATION SYSTEM ===== */
 
-    let card=document.createElement("div");
-    card.innerHTML=`<img src="${b.img}"><br>${b.name}`;
-card.dataset.index = i;
-    card.onclick=()=>openMutationPicker(i);
-
-    grid.appendChild(card);
-  });
-
-  /* 🔥 FILTRE APRES LOAD */
-  let cards=grid.children;
-  for(let i=0;i<cards.length;i++){
-    let index = cards[i].dataset.index;
-let b = brainrots[index];
-    if(!b) continue;
-
-    if(selectedRarity!=="All" && b.rarity!==selectedRarity){
-      cards[i].style.display="none";
-    } else {
-      cards[i].style.display="flex";
-    }
-  }
-}
-
-document.getElementById("searchBrainrot").addEventListener("keyup", loadPicker);
-
-/* MUTATION */
 function openMutationPicker(index){
-  selectedBrainrot=index;
-  selectedMutation=null;
 
-  let preview=document.getElementById("selectedBrainrotPreview");
-  preview.innerHTML=`<button onclick="document.getElementById('mutationPicker').style.display='none'">❌</button><img src="${brainrots[index].img}"><p>${brainrots[index].name}</p>`;
+  selectedIndex = index;
+  selectedMutation = null;
 
-  let mList=document.getElementById("mutationList");
-  mList.innerHTML="";
+  let mList = document.getElementById("mutationList");
+  mList.innerHTML = "";
 
   mutations.forEach(m=>{
-    let btn=document.createElement("div");
+    let btn = document.createElement("div");
 
-    btn.innerHTML=`${m.icon} ${m.name}`;
-    btn.style.padding="8px";
-    btn.style.background="#1e293b";
-    btn.style.cursor="pointer";
+    btn.innerText = m.icon + " " + m.name;
+    btn.className = "item";
 
-    btn.onclick=()=>{
-      selectedMutation=m.name;
-      document.querySelectorAll("#mutationList div").forEach(b=>b.style.background="#1e293b");
-      btn.style.background="orange";
+    btn.onclick = ()=>{
+      selectedMutation = m.name;
+
+      document.querySelectorAll("#mutationList .item")
+        .forEach(b => b.classList.remove("active"));
+
+      btn.classList.add("active");
     };
 
     mList.appendChild(btn);
   });
 
-  let tList=document.getElementById("traitsList");
-  tList.innerHTML="";
+  let tList = document.getElementById("traitsList");
+  tList.innerHTML = "";
 
   traits.forEach(t=>{
-    let el=document.createElement("span");
-    el.className="trait";
-    el.innerText=t;
-    el.onclick=()=>el.classList.toggle("active");
+    let el = document.createElement("div");
+    el.innerText = t;
+    el.className = "item";
+
+    el.onclick = ()=>{
+      el.classList.toggle("active");
+    };
+
     tList.appendChild(el);
   });
 
-  document.getElementById("mutationPicker").style.display="block";
+  document.getElementById("mutationPicker").style.display = "block";
 }
+/* ===== VALIDATION ===== */
 
 function validateSelection(){
 
+  let selectedTraits = [...document.querySelectorAll("#traitsList .active")]
+    .map(t=>t.innerText);
+
   if(!selectedMutation){
-    alert("Choisis une mutation !");
-    return;
+    selectedMutation = "No mutation";
   }
 
-  let selectedTraits=[...document.querySelectorAll(".trait.active")]
-  .map(t=>t.innerText);
+  addItem(current, selectedIndex, selectedMutation, selectedTraits);
 
-  addItem(selectedBrainrot, selectedMutation, selectedTraits);
-
-  document.getElementById("mutationPicker").style.display="none";
-  closePicker();
 }
 
-function formatMutation(name){
-  return "mutation-" + name.replace(/\s/g,"");
+/* PICKER */
+function openPicker(id){
+
+  current = id;
+
+  document.getElementById("picker").style.display = "block";
+
+  filterItems();
+
 }
 
-/* 🔥 FIX VALUE */
-function addItem(i,mutation,traitsList){
-  let c=document.getElementById(currentContainer);
+function setFilter(rarity){
+  currentFilter = rarity;
 
-  let base=brainrots[i].value;
-  let multi=mutationValues[mutation]||1;
+  document.querySelectorAll(".rarityFilters button")
+    .forEach(btn => btn.classList.remove("activeFilter"));
 
-  let final=base*multi;
+  document.querySelectorAll(".rarityFilters button")
+.forEach(btn=>{
 
-  traitsList.forEach(t=>{
-  let clean = t.replace(/^[^\w]+/, "").trim(); // enlève emoji
-  final *= traitsValues[clean] || 1;
+  if(btn.innerText === rarity){
+    btn.classList.add("activeFilter");
+  }
+
 });
 
-  final = parseFloat(final.toFixed(2));
+  filterItems();
+}
 
-  let div=document.createElement("div");
-  div.className="item " + formatMutation(mutation);
+function filterItems(){
 
-  div.innerHTML=`
-    <img src="${brainrots[i].img}">
-    <p>${brainrots[i].name} (${final})</p>
-    <p>${mutation}</p>
-    <p>${traitsList.join(" | ")}</p>
-    <button onclick="this.parentElement.remove()">❌</button>
+  let search = document
+    .getElementById("searchBar")
+    .value
+    .toLowerCase();
+
+  let grid = document.getElementById("grid");
+  grid.innerHTML = "";
+
+  brainrots.forEach((i,index)=>{
+
+    let matchSearch =
+      i.name.toLowerCase().includes(search);
+
+    let matchRarity =
+      currentFilter === "All" ||
+      i.rarity === currentFilter;
+
+    if(matchSearch && matchRarity){
+
+      let div = document.createElement("div");
+
+      div.innerHTML = `
+        <img src="${i.img}" style="width:60px"><br>
+        <b>${i.name}</b>
+        <br>
+        <small>${i.rarity}</small>
+      `;
+
+      div.onclick = ()=>openMutationPicker(index);
+
+      grid.appendChild(div);
+    }
+
+  });
+
+}
+
+function closePicker(){
+document.getElementById("picker").style.display="none";
+}
+
+
+/* ADD */
+function addItem(side, i, mutation, traitsList, loaded = false){
+
+  let c = document.getElementById(side);
+
+  let base = brainrots[i].value;
+  let final = base;
+
+  // mutation
+  if(mutationValues[mutation]){
+    final *= mutationValues[mutation];
+  }
+
+  // traits
+  traitsList.forEach(t=>{
+
+    let clean = t.replace(/[^\w\s]/gi,'').trim();
+
+    if(traitsValues[clean]){
+      final *= traitsValues[clean];
+    }
+
+  });
+
+  let div = document.createElement("div");
+
+  div.className = "item";
+
+  div.innerHTML = `
+  <img src="${brainrots[i].img}" style="width:50px"><br>
+
+  <b>${brainrots[i].name}</b>
+  <br>💰 ${final.toFixed(2)}
+
+  <br>✨ ${mutation || "None"}
+
+  <div style="
+  margin-top:5px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  ">
+  ${traitsList.map(t=>`<span style="margin:2px">${t}</span>`).join("")}
+  </div>
+
+  <button class="deleteBtn">
+  ✕
+</button>
   `;
 
   div.dataset.value = final;
+
+  // DELETE
+  div.querySelector("button").onclick = ()=>{
+
+    div.remove();
+
+    if(side === "your"){
+
+      yourItems = yourItems.filter(item =>
+        !(
+          item.index === i &&
+          item.mutation === mutation &&
+          JSON.stringify(item.traitsList) === JSON.stringify(traitsList)
+        )
+      );
+
+    } else {
+
+      theirItems = theirItems.filter(item =>
+        !(
+          item.index === i &&
+          item.mutation === mutation &&
+          JSON.stringify(item.traitsList) === JSON.stringify(traitsList)
+        )
+      );
+
+    }
+
+    resetTrade();
+
+  };
+
+  // AJOUT VISUEL
   c.appendChild(div);
+
+  // SAVE
+if(!loaded){
+  
+    savePopularItem(brainrots[i].name);
+
+    const data = {
+      index:i,
+      mutation,
+      traitsList
+    };
+
+    if(side === "your"){
+      yourItems.push(data);
+    } else {
+      theirItems.push(data);
+    }
+
+  }
+
+ // ===== POPULAR ITEMS =====
+
+const itemName = brainrots[i].name;
+
+if(!popularCounts[itemName]){
+  popularCounts[itemName] = 0;
 }
 
-/* TRADE */
-function getTotal(id){
-  let items=document.getElementById(id).getElementsByClassName("item");
-  let total=0;
-  for(let item of items){ total+=Number(item.dataset.value); }
-  return total;
+popularCounts[itemName]++;
+
+localStorage.setItem(
+  "popularCounts",
+  JSON.stringify(popularCounts)
+);
+
+function savePopularItem(name){
+
+  let popular = JSON.parse(
+    localStorage.getItem("popularItems")
+  ) || {};
+
+  if(!popular[name]){
+    popular[name] = 0;
+  }
+
+  popular[name]++;
+
+  localStorage.setItem(
+    "popularItems",
+    JSON.stringify(popular)
+  );
+
+  updatePopularItems();
+
 }
 
+updatePopularItems();
+
+  closePicker();
+
+  document.getElementById("mutationPicker").style.display = "none";
+
+const trendBar =
+  document.getElementById("topTrendBar");
+
+if(sorted.length > 0){
+
+  trendBar.innerHTML =
+    "🔥 Top items aujourd’hui : " +
+
+    sorted.map(([name,count]) =>
+      `${name} (${count})`
+    ).join(" • ");
+
+}
+
+}
+
+/* CALCUL */
+function total(id){
+let items=document.getElementById(id).children;
+let t=0;
+
+for(let i of items){
+t+=Number(i.dataset.value);
+}
+return t;
+}
+
+let tradeHistory = [];
+
+/* CHECK */
 function checkTrade(){
-  let y=getTotal("yourContainer");
-  let t=getTotal("theirContainer");
 
-  document.getElementById("yourValue").innerText="Valeur : "+y;
-  document.getElementById("theirValue").innerText="Valeur : "+t;
+  let y = total("your");
+  let t = total("their");
 
-  let r=document.getElementById("result");
+  document.getElementById("yourVal").innerText =
+    y.toFixed(2);
 
-  if(t>y){ r.innerText="WIN ✅"; }
-  else if(t===y){ r.innerText="FAIR 🤝"; }
-  else{ r.innerText="LOSE ❌"; }
+  document.getElementById("theirVal").innerText =
+    t.toFixed(2);
+
+  let diff = t - y;
+
+  document.getElementById("diffVal").innerText =
+    diff.toFixed(2);
+
+  let percent =
+    (t / (y + t)) * 100 || 50;
+
+  document.getElementById("fill").style.width =
+    percent + "%";
+
+  document.getElementById("cursor").style.left =
+    percent + "%";
+
+  let text;
+
+  // ===== TRADE RESULT =====
+
+  if(diff >= 50){
+
+    text = "🚀 MASSIVE W";
+
+  }
+  else if(diff >= 20){
+
+    text = "🔥 HUGE W";
+
+  }
+  else if(diff >= 5){
+
+    text = "✅ WIN";
+
+  }
+  else if(diff > -5){
+
+    text = "⚖️ FAIR";
+
+  }
+  else if(diff > -20){
+
+    text = "❌ LOSE";
+
+  }
+  else if(diff > -50){
+
+    text = "💀 HUGE L";
+
+  }
+  else{
+
+    text = "☠️ MASSIVE L";
+
+  }
+
+  document.getElementById("tradeStatus").innerHTML =
+    text;
+
+  addHistory(text, y, t);
+
+  addDoc(
+  collection(db, "trades"),
+  {
+    yours: y,
+    theirs: t,
+    status: text,
+    created: Date.now()
+  }
+);
+
+ console.log("HISTORIQUE OK");
+ addHistory(text, y, t);
+
+  // ===== ANIMATIONS =====
+
+  const box =
+    document.querySelector(".resultBox");
+
+  box.classList.remove("pop");
+
+  void box.offsetWidth;
+
+  box.classList.add("pop");
+
+  // ===== CONFETTI =====
+console.log("CONFETTI OK");
+  if(text === "🔥 HUGE W"){
+
+  confetti({
+
+    particleCount:120,
+    spread:90,
+    origin:{ y:0.6 }
+
+  });
+
 }
 
-/* INIT */
-setTimeout(loadRarityFilter,100);
+if(text === "🚀 MASSIVE W"){
+
+  confetti({
+
+    particleCount:300,
+    spread:140,
+    origin:{ y:0.6 }
+
+  });
+
+  document.body.style.animation =
+    "massiveFlash 0.6s ease";
+
+  setTimeout(()=>{
+
+    document.body.style.animation = "";
+
+  },600);
+
+}
+
+}
+
+function addHistory(result, yourValue, theirValue){
+
+  const history =
+    document.getElementById("historyList");
+
+  const trade = {
+    result,
+    yourValue,
+    theirValue
+  };
+
+  // ajoute au début
+  tradeHistory.unshift(trade);
+
+  // reset affichage
+  history.innerHTML = "";
+
+  // affiche les 4 derniers
+  tradeHistory.slice(0,4).forEach(t=>{
+
+    history.appendChild(
+      createHistoryElement(t)
+    );
+
+  });
+
+  // bouton voir +
+  if(tradeHistory.length > 4){
+
+    document.getElementById("showAllBtn")
+      .style.display = "block";
+
+  }
+
+  updateFullHistory();
+
+}
+
+
+function createHistoryElement(trade){
+
+  const div = document.createElement("div");
+
+  div.className = "historyEntry";
+
+  if(trade.result.includes("W")){
+    div.classList.add("historyW");
+  }
+  else if(trade.result.includes("FAIR")){
+    div.classList.add("historyFair");
+  }
+  else{
+    div.classList.add("historyL");
+  }
+
+  div.innerHTML = `
+    <b>${trade.result}</b><br>
+    ${trade.yourValue.toFixed(2)}
+    vs
+    ${trade.theirValue.toFixed(2)}
+  `;
+
+  return div;
+}
+
+function updateFullHistory(){
+
+  const full =
+    document.getElementById("fullHistoryList");
+
+  full.innerHTML = "";
+
+  tradeHistory.forEach(trade=>{
+
+    full.appendChild(
+      createHistoryElement(trade)
+    );
+
+  });
+
+}
+
+document.getElementById("showAllBtn")
+.onclick = ()=>{
+
+  document.getElementById("historyPopup")
+    .style.display = "block";
+
+};
+
+function closeHistoryPopup(){
+
+  document.getElementById("historyPopup")
+    .style.display = "none";
+
+}
+
+function updateFullHistory(){
+
+  let full = document.getElementById("fullHistoryList");
+
+  full.innerHTML = "";
+
+  tradeHistory.forEach(trade=>{
+
+    let div = createHistoryElement(trade);
+
+    full.appendChild(div);
+
+  });
+
+}
+
+function updatePopularItems(){
+
+  let popular = JSON.parse(
+    localStorage.getItem("popularItems")
+  ) || {};
+
+  let list = document.getElementById("popularList");
+
+  list.innerHTML = "";
+
+  let sorted = Object.entries(popular)
+    .sort((a,b)=>b[1]-a[1])
+    .slice(0,5);
+
+  if(sorted.length === 0){
+
+    list.innerHTML =
+      "<p>Aucun item populaire pour le moment</p>";
+
+    document.querySelector(".trends").innerHTML =
+      "🔥 Aucun item populaire pour le moment";
+
+    return;
+  }
+
+  // ===== PANEL LEFT =====
+
+  sorted.forEach(([name,count])=>{
+
+    let itemData = brainrots.find(
+      b => b.name === name
+    );
+
+    let div = document.createElement("div");
+
+    div.className = "popularItem";
+
+    div.innerHTML = `
+      <div style="
+        display:flex;
+        align-items:center;
+        gap:8px;
+      ">
+        <img src="${itemData?.img || ''}" style="
+          width:28px;
+          height:28px;
+          border-radius:6px;
+          object-fit: contain;
+        ">
+
+        <span>${name}</span>
+      </div>
+
+      <div style="
+  display:flex;
+  align-items:center;
+  gap:4px;
+  min-width:45px;
+  justify-content:flex-end;
+  font-weight:bold;
+">
+  <span>${count}</span>
+  <span>🔥</span>
+</div>
+    `;
+
+    list.appendChild(div);
+
+  });
+
+  // ===== TOP BAR =====
+
+  document.querySelector(".trends").innerHTML =
+    "🔥 Top items aujourd'hui : " +
+
+    sorted.map(([name,count])=>{
+
+      let itemData = brainrots.find(
+        b => b.name === name
+      );
+
+      return `
+        <span style="
+          display:inline-flex;
+          align-items:center;
+          gap:5px;
+          margin-right:10px;
+        ">
+          <img src="${itemData?.img || ''}" style="
+            width:22px;
+            height:22px;
+            border-radius:5px;
+            object-fit:cover;
+            vertical-align:middle;
+          ">
+
+          ${name} (${count})
+        </span>
+      `;
+
+    }).join(" • ");
+
+}
+updatePopularItems();
+
+function clearTrade(side){
+
+  document.getElementById(side).innerHTML = "";
+
+  if(side === "your"){
+    yourItems = [];
+  }else{
+    theirItems = [];
+  }
+
+  resetTrade();
+}
+
+function closeMutationPicker(){
+  document.getElementById("mutationPicker").style.display = "none";
+}
+
+window.onclick = function(e){
+
+  const picker = document.getElementById("picker");
+  const mutationPicker = document.getElementById("mutationPicker");
+
+  if(e.target === picker){
+    picker.style.display = "none";
+  }
+
+  if(e.target === mutationPicker){
+    mutationPicker.style.display = "none";
+  }
+
+}
+
+document.addEventListener("keydown", function(e){
+
+  if(e.key === "Escape"){
+
+    document.getElementById("picker").style.display = "none";
+
+    document.getElementById("mutationPicker").style.display = "none";
+
+  }
+
+});
 
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<div id="historyPopup" style="
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#000a;
+z-index:9999;
+">
+
+  <div style="
+  background:#0f172a;
+  width:90%;
+  max-width:700px;
+  height:80vh;
+  margin:40px auto;
+  padding:20px;
+  border-radius:15px;
+  overflow-y:auto;
+  ">
+
+    <div style="
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+    ">
+      <h2>🕒 Historique complet</h2>
+
+      <button onclick="closeHistoryPopup()" class="btn">
+        Fermer
+      </button>
+    </div>
+
+    <div id="fullHistoryList"></div>
+
+  </div>
+
+</div>
+
+<div id="historyPopup" style="
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#000c;
+z-index:9999;
+">
+
+  <div style="
+  background:#0f172a;
+  width:90%;
+  max-width:700px;
+  height:80vh;
+  overflow:auto;
+  margin:40px auto;
+  padding:20px;
+  border-radius:20px;
+  ">
+
+    <div style="
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    ">
+
+      <h2>🕒 Historique complet</h2>
+
+      <button onclick="
+      document.getElementById('historyPopup').style.display='none'
+      " style="
+      background:none;
+      border:none;
+      color:white;
+      font-size:30px;
+      cursor:pointer;
+      ">
+      ✕
+      </button>
+
+    </div>
+
+    <div id="fullHistoryList"></div>
+
+  </div>
+
+</div>
+
 
 </body>
 </html>
