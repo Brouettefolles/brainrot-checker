@@ -1457,6 +1457,43 @@ if(
 
 const q = query(
 
+  const tradesQuery = query(
+
+  collection(db, "trades"),
+
+  orderBy("created","desc"),
+
+  limit(20)
+
+);
+
+onSnapshot(tradesQuery,(snapshot)=>{
+
+  tradeHistory = [];
+
+  snapshot.forEach(doc=>{
+
+    tradeHistory.push(doc.data());
+
+  });
+
+  const history =
+    document.getElementById("historyList");
+
+  history.innerHTML = "";
+
+  tradeHistory.slice(0,4).forEach(trade=>{
+
+    history.appendChild(
+      createHistoryElement(trade)
+    );
+
+  });
+
+  updateFullHistory();
+
+});
+  
   collection(db, "messages"),
 
   orderBy("created", "asc"),
