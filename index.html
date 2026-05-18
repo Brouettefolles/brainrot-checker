@@ -1773,7 +1773,7 @@ const lower =
 if(
 
   bannedWords.some(word =>
-    lower.includes(word)
+    (lower || "").includes(word)
   )
 
 ){
@@ -3154,10 +3154,19 @@ function createHistoryElement(trade){
 
   div.className = "historyEntry";
 
-  if(trade.result.includes("W")){
+  const result =
+    trade.result || trade.status || "Trade";
+
+  const yourValue =
+    trade.yourValue || trade.yours || 0;
+
+  const theirValue =
+    trade.theirValue || trade.theirs || 0;
+
+  if(result.includes("W")){
     div.classList.add("historyW");
   }
-  else if(trade.result.includes("FAIR")){
+  else if(result.includes("FAIR")){
     div.classList.add("historyFair");
   }
   else{
@@ -3165,10 +3174,10 @@ function createHistoryElement(trade){
   }
 
   div.innerHTML = `
-    <b>${trade.result}</b><br>
-    ${trade.yourValue.toFixed(2)}
+    <b>${result}</b><br>
+    ${Number(yourValue).toFixed(2)}
     vs
-    ${trade.theirValue.toFixed(2)}
+    ${Number(theirValue).toFixed(2)}
   `;
 
   return div;
