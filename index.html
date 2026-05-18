@@ -4,8 +4,8 @@
 <head>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6910722785349390"
-     crossorigin="anonymous"></script>
-  
+crossorigin="anonymous"></script>
+
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1K582ZEEHL"></script>
 
 <script>
@@ -19,6 +19,23 @@
   gtag('js', new Date());
 
   gtag('config', 'G-1K582ZEEHL');
+
+window.comingSoon = function(name){
+
+  document.getElementById("soonTitle")
+    .innerText = name;
+
+  document.getElementById("soonPopup")
+    .style.display = "flex";
+
+}
+
+window.closeSoon = function(){
+
+  document.getElementById("soonPopup")
+    .style.display = "none";
+
+}
 
 </script>
 
@@ -1058,11 +1075,319 @@ body{
 
 }
   
+.footerLinks{
+
+  width:100%;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  gap:20px;
+
+  flex-wrap:wrap;
+
+  margin-top:60px;
+
+  padding:35px 20px;
+
+  background:rgba(0,0,0,0.15);
+
+  border-top:1px solid rgba(255,255,255,0.08);
+
+  box-shadow:0 -5px 20px rgba(0,0,0,0.2);
+
+}
+
+.footerLinks button{
+
+  background:linear-gradient(90deg,#1b2a5e,#223b8f);
+
+  border:none;
+
+  color:white;
+
+  padding:12px 22px;
+
+  border-radius:12px;
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+  transition:0.2s;
+
+  box-shadow:0 0 10px rgba(0,0,0,0.3);
+
+}
+
+.footerLinks button:hover{
+
+  transform:scale(1.05);
+
+  background:linear-gradient(90deg,#2748b3,#2d5eff);
+
+}
+
+.legalPopup{
+
+  position:fixed;
+
+  top:0;
+  left:0;
+
+  width:100%;
+  height:100%;
+
+  background:rgba(0,0,0,0.8);
+
+  z-index:999999;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+}
+
+.legalContent{
+
+  background:#16244f;
+
+  width:90%;
+  max-width:700px;
+
+  max-height:80vh;
+
+  overflow-y:auto;
+
+  border-radius:15px;
+
+  padding:25px;
+
+  color:white;
+
+  position:relative;
+
+}
+
+.closeLegal{
+
+  position:absolute;
+
+  top:10px;
+  right:10px;
+
+  background:red;
+
+  border:none;
+
+  color:white;
+
+  width:35px;
+  height:35px;
+
+  border-radius:50%;
+
+  cursor:pointer;
+
+}
+
+.footerText{
+
+  width:100%;
+
+  text-align:center;
+
+  margin-top:15px;
+
+  color:rgba(255,255,255,0.6);
+
+  font-size:14px;
+
+  line-height:1.6;
+
+}
+
+.topNav{
+
+  width:100%;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  gap:15px;
+
+  flex-wrap:wrap;
+
+  padding:20px;
+
+  background:rgba(0,0,0,0.15);
+
+  border-bottom:1px solid rgba(255,255,255,0.08);
+
+}
+
+.navBtn{
+
+  background:#1b2a5e;
+
+  border:none;
+
+  color:white;
+
+  padding:12px 20px;
+
+  border-radius:12px;
+
+  cursor:pointer;
+
+  font-weight:bold;
+
+  transition:0.2s;
+
+}
+
+.navBtn:hover{
+
+  transform:scale(1.05);
+
+  background:#2748b3;
+
+}
+
+.activeNav{
+
+  background:linear-gradient(90deg,#00d4ff,#00ffb3);
+
+  color:black;
+
+}
+
+.soonPopup{
+
+  position:fixed;
+
+  top:0;
+  left:0;
+
+  width:100%;
+  height:100%;
+
+  background:rgba(0,0,0,0.75);
+
+  display:flex;
+
+  justify-content:center;
+  align-items:center;
+
+  z-index:999999;
+
+}
+
+.soonContent{
+
+  background:#16244f;
+
+  width:90%;
+  max-width:450px;
+
+  padding:30px;
+
+  border-radius:20px;
+
+  text-align:center;
+
+  color:white;
+
+  position:relative;
+
+  box-shadow:0 0 30px rgba(0,0,0,0.5);
+
+  animation:popupAnim 0.2s ease;
+
+}
+
+.soonContent h2{
+
+  margin-bottom:15px;
+
+  color:#00ffe1;
+
+}
+
+.closeSoon{
+
+  position:absolute;
+
+  top:10px;
+  right:10px;
+
+  width:35px;
+  height:35px;
+
+  border:none;
+
+  border-radius:50%;
+
+  background:red;
+
+  color:white;
+
+  cursor:pointer;
+
+}
+
+@keyframes popupAnim{
+
+  from{
+
+    transform:scale(0.8);
+    opacity:0;
+
+  }
+
+  to{
+
+    transform:scale(1);
+    opacity:1;
+
+  }
+
+}
+
 </style>
 
 </head>
 
 <body>
+
+<div class="topNav">
+
+  <button class="navBtn activeNav">
+    🔥 Trade
+  </button>
+
+  <button class="navBtn"
+  onclick="comingSoon('Renaissance')">
+    🧬 Renaissance
+  </button>
+
+  <button class="navBtn"
+  onclick="comingSoon('Rituals')">
+    ✨ Rituals
+  </button>
+
+  <button class="navBtn"
+  onclick="comingSoon('Values')">
+    📈 Values
+  </button>
+
+</div>
 
 <h1 class="title">✨ Vérificateur d'échanges Brainrot ✨</h1>
 
@@ -1626,6 +1951,107 @@ document.getElementById("showAllBtn").onclick = ()=>{
   ).style.display = "block";
 
 };
+
+window.openLegal = function(type){
+
+  let text = "";
+
+  if(type === "privacy"){
+
+    text = `
+
+    <h2>Privacy Policy</h2>
+
+    <p>
+    BrainrotValue may use cookies,
+    Google Analytics, Firebase and
+    Google AdSense services to improve
+    user experience and website performance.
+    </p>
+
+    <p>
+    No personal sensitive information
+    is sold or shared with third parties.
+    </p>
+
+    <p>
+    By using this website,
+    you agree to the use of these services.
+    </p>
+
+    `;
+
+  }
+
+  if(type === "contact"){
+
+    text = `
+
+    <h2>Contact</h2>
+
+    <p>
+    For questions, suggestions or support:
+    </p>
+
+    <p>
+    brainrotvalue@gmail.com
+    </p>
+
+    <p>
+    Discord community coming soon.
+    </p>
+
+    `;
+
+  }
+
+  if(type === "about"){
+
+    text = `
+
+    <h2>About</h2>
+
+    <p>
+    BrainrotValue is a community tool
+    created to help Brainrot players
+    verify trades, compare values
+    and optimize exchanges.
+    </p>
+
+    <p>
+    The website is constantly updated
+    with new features and game content.
+    </p>
+
+    <p>
+    More tools and systems are coming soon.
+    </p>
+
+    `;
+
+  }
+
+  document.getElementById("legalText")
+    .innerHTML = text;
+
+  document.getElementById("legalPopup")
+    .style.display = "flex";
+
+}
+
+window.closeLegal = function(){
+
+  document.getElementById("legalPopup")
+    .style.display = "none";
+
+}
+
+function closeLegal(){
+
+  document.getElementById("legalPopup")
+  .style.display = "none";
+
+}
 
 </script>
 
@@ -3043,6 +3469,81 @@ z-index:9999;
 
 </div>
 
+<div class="footerLinks">
+
+  <button onclick="openLegal('privacy')">
+    Privacy Policy
+  </button>
+
+  <button onclick="openLegal('contact')">
+    Contact
+  </button>
+
+  <button onclick="openLegal('about')">
+    About
+  </button>
+
+<div class="footerText">
+
+  BrainrotValue © 2025<br>
+
+  Community trade calculator for Brainrot players.
+
+</div>
+
+</div>
+
+<div id="legalPopup" class="legalPopup" style="display:none;">
+
+  <div class="legalContent">
+
+    <button class="closeLegal"
+    onclick="closeLegal()">
+      ✕
+    </button>
+
+    <div id="legalText"></div>
+
+  </div>
+
+</div>
+
+<div id="legalPopup" class="legalPopup" style="display:none;">
+
+  <div class="legalContent">
+
+    <button class="closeLegal" onclick="closeLegal()">
+      ✕
+    </button>
+
+    <div id="legalText"></div>
+
+  </div>
+
+</div>
+
+<div id="soonPopup" class="soonPopup" style="display:none;">
+
+  <div class="soonContent">
+
+    <button class="closeSoon"
+    onclick="closeSoon()">
+      ✕
+    </button>
+
+    <h2 id="soonTitle"></h2>
+
+    <p>
+      This feature is currently in development 🚧
+    </p>
+
+    <p>
+      More updates coming soon 😎🔥
+    </p>
+
+  </div>
+
+</div>
 
 </body>
 </html>
